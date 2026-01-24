@@ -27,14 +27,14 @@ export function Education() {
                             initial={{ opacity: 0, x: -20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             transition={{ delay: index * 0.1 }}
-                            className="glass rounded-2xl p-8 hover:bg-white/5 transition-colors border-l-4 border-l-purple-500"
+                            className="relative group rounded bg-black p-8 border border-zinc-900 hover:border-zinc-700 transition-colors"
                         >
                             <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                                <h3 className="text-2xl font-bold text-white">{item.institution}</h3>
-                                <span className="text-zinc-400 font-medium">{item.period}</span>
+                                <h3 className="text-xl font-bold text-white font-mono tracking-tight">{item.institution}</h3>
+                                <span className="text-xs text-zinc-500 font-mono border border-zinc-900 px-2 py-1 rounded bg-zinc-950">{item.period}</span>
                             </div>
-                            <h4 className="text-xl text-purple-400 mb-2">{item.degree}</h4>
-                            <p className="text-zinc-400">{item.description}</p>
+                            <h4 className="text-zinc-300 mb-4">{item.degree}</h4>
+                            <p className="text-zinc-500 text-sm leading-relaxed">{item.description}</p>
                         </motion.div>
                     ))}
                 </div>

@@ -23,33 +23,33 @@ export function Projects() {
                     {t.items.map((project: any, index: number) => (
                         <motion.div
                             key={index}
-                            initial={{ opacity: 0, scale: 0.9 }}
+                            initial={{ opacity: 0, scale: 0.95 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             transition={{ delay: index * 0.1 }}
-                            className="group glass relative overflow-hidden rounded-3xl border border-white/10 bg-black/50 p-6 transition-all hover:border-white/20"
+                            className="group relative overflow-hidden rounded bg-black border border-zinc-900 hover:border-zinc-600 transition-all duration-300 flex flex-col h-full"
                         >
-                            <div className="mb-4">
-                                <h3 className="text-2xl font-bold text-white mb-2">{project.title}</h3>
-                                <p className="text-zinc-400 line-clamp-3">{project.description}</p>
-                            </div>
+                            <div className="p-8 flex flex-col h-full">
+                                <h3 className="text-xl font-bold text-white mb-2 font-mono">{project.title}</h3>
+                                <p className="text-zinc-500 text-sm mb-6 line-clamp-3 leading-relaxed flex-grow">{project.description}</p>
 
-                            <div className="flex flex-wrap gap-2 mb-6">
-                                {project.tech.map((tech: string, i: number) => (
-                                    <span
-                                        key={i}
-                                        className="rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white"
-                                    >
-                                        {tech}
-                                    </span>
-                                ))}
-                            </div>
+                                <div className="flex flex-wrap gap-2 mb-8 mt-auto">
+                                    {project.tech.map((tech: string, i: number) => (
+                                        <span
+                                            key={i}
+                                            className="text-[10px] uppercase tracking-wider text-zinc-400 border border-zinc-800 px-2 py-1"
+                                        >
+                                            {tech}
+                                        </span>
+                                    ))}
+                                </div>
 
-                            <a
-                                href={project.link}
-                                className="inline-flex items-center text-sm font-semibold text-white hover:text-purple-400 transition-colors"
-                            >
-                                View Project →
-                            </a>
+                                <a
+                                    href={project.link}
+                                    className="inline-flex items-center text-xs font-bold text-white uppercase tracking-widest hover:text-green-400 transition-colors mt-auto pt-4"
+                                >
+                                    [ View Project ]
+                                </a>
+                            </div>
                         </motion.div>
                     ))}
                 </div>

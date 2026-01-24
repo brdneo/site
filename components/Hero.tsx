@@ -9,47 +9,81 @@ export function Hero() {
     const t = DATA[language].hero;
 
     return (
-        <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 text-center">
-            {/* Background Elements */}
-            <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-                <div className="h-[500px] w-[500px] rounded-full bg-blue-500/20 blur-[100px]" />
-                <div className="absolute h-[300px] w-[300px] translate-x-[100px] rounded-full bg-purple-500/20 blur-[100px]" />
+        <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 text-center bg-black font-mono selection:bg-white selection:text-black">
+
+            {/* Digital Night Background */}
+            <div className="absolute inset-0 bg-black">
+                {/* Subtle Grid */}
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
+
+                {/* "Moon" / Glow Source */}
+                <div className="absolute top-1/4 left-1/2 -translate-x-1/2 h-[500px] w-[500px] rounded-full bg-white/[0.03] blur-[120px]" />
             </div>
 
             <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="relative z-10 space-y-6"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1.0 }}
+                className="relative z-10 max-w-4xl w-full"
             >
-                <div className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-400 backdrop-blur-md">
-                    <span>{t.badge}</span>
+                {/* System Status Badge - Ultra Minimal */}
+                <div className="flex justify-center mb-12">
+                    <div className="flex items-center gap-2 px-3 py-1 rounded-full border border-zinc-800 bg-black text-[10px] text-zinc-500 uppercase tracking-widest">
+                        <div className="h-1.5 w-1.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)] animate-pulse" />
+                        {t.badge}
+                    </div>
                 </div>
 
-                <h1 className="text-6xl font-bold tracking-tight sm:text-7xl md:text-8xl">
-                    <span className="block text-white">{t.greeting}</span>
-                    <span className="text-gradient block">{t.name}</span>
-                </h1>
+                {/* Main Content */}
+                <div className="space-y-6">
+                    {/* Prompt */}
+                    <motion.p
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 }}
+                        className="text-sm md:text-base text-zinc-500 font-mono mb-4"
+                    >
+                        {t.greeting} <span className="text-zinc-300">{t.name}</span>
+                    </motion.p>
 
-                <p className="mx-auto max-w-2xl text-lg text-zinc-400 sm:text-xl">
-                    {t.role} | {t.description}
-                </p>
+                    {/* Name - Big, Bold, Stark White */}
+                    <motion.h1
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.4 }}
+                        className="text-3xl sm:text-5xl md:text-8xl font-bold tracking-tighter text-white"
+                    >
+                        {t.role}
+                    </motion.h1>
 
+                    {/* Subtext with Terminal Divider */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.6 }}
+                        className="flex items-center justify-center gap-4 text-zinc-500 text-sm md:text-lg mt-6"
+                    >
+                        <span>{t.description}</span>
+                        <span className="animate-blink">_</span>
+                    </motion.div>
+                </div>
+
+                {/* Minimalist Command Buttons */}
                 <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.4 }}
-                    className="flex justify-center gap-4 pt-4"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.8 }}
+                    className="flex flex-col sm:flex-row justify-center gap-6 pt-16"
                 >
                     <a
                         href="#contact"
-                        className="group relative inline-flex h-11 items-center justify-center overflow-hidden rounded-full bg-white px-8 font-medium text-black transition-transform hover:scale-105"
+                        className="group relative inline-flex h-12 items-center justify-center bg-white text-black px-8 text-sm font-bold tracking-widest uppercase transition-transform hover:scale-105"
                     >
-                        <span>{t.ctaPrimary}</span>
+                        {t.ctaPrimary}
                     </a>
                     <a
                         href="#projects"
-                        className="inline-flex h-11 items-center justify-center rounded-full border border-white/10 bg-white/5 px-8 font-medium text-white transition-colors hover:bg-white/10"
+                        className="inline-flex h-12 items-center justify-center border border-zinc-800 bg-black px-8 text-sm font-medium text-zinc-400 uppercase tracking-widest transition-colors hover:border-zinc-600 hover:text-white"
                     >
                         {t.ctaSecondary}
                     </a>

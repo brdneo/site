@@ -9,13 +9,13 @@ export const DATA = {
             { name: "Contato", href: "#contact" },
         ],
         hero: {
-            greeting: "Olá, eu sou",
-            name: "Brendo",
-            role: "Cientista de Dados & Estatístico",
-            description: "Especialista em Linux, automação e análise de dados. Focado em engenharia de dados e integração de sistemas.",
-            badge: "Disponível para trabalho",
-            ctaPrimary: "Entre em Contato",
-            ctaSecondary: "Ver Projetos"
+            greeting: "user@brendo:~$",
+            name: "whoami",
+            role: "Brendo Bittencourt",
+            description: "Estatística | Linux | Automação",
+            badge: "System Status: ONLINE",
+            ctaPrimary: "Executar Projeto",
+            ctaSecondary: "Acessar Logs"
         },
         experience: {
             title: "Experiência Profissional",
@@ -53,13 +53,24 @@ export const DATA = {
                     institution: "Descomplica Faculdade Digital",
                     degree: "Tecnólogo em Ciência de Dados",
                     period: "2024 - 2026",
-                    description: "Cursando Tecnólogo em Ciência de Dados, com foco em análise de dados, machine learning e engenharia de dados.",
+                    description: "Ênfase em prática aplicada e ferramentas",
+                },
+                {
+                    institution: "UNIFACS - Universidade Salvador",
+                    degree: "Bacharelado em Estatística",
+                    period: "2024 - 2028",
+                    description: "Especialização em base matemática e inferência",
                 },
             ]
         },
         skills: {
             title: "Habilidades & Diferenciais",
-            subtitle: "Stack técnica organizada por área de atuação"
+            subtitle: "Stack técnica organizada por área de atuação",
+            groups: [
+                { category: "Desenvolvimento" },
+                { category: "Dados & Infra" },
+                { category: "Diferenciais" }
+            ]
         },
         projects: {
             title: "Projetos em Destaque",
@@ -76,6 +87,12 @@ export const DATA = {
                     tech: ["Python", "Shell", "SQL"],
                     link: "#",
                 },
+                {
+                    title: "Automação de Dados",
+                    description: "Scripts para extração e transformação de dados utilizando Python e Shell Script.",
+                    tech: ["Python", "Shell", "SQL"],
+                    link: "#",
+                },
             ]
         },
         footer: {
@@ -83,7 +100,7 @@ export const DATA = {
             subtitle: "Atualmente aberto para novas oportunidades e colaborações.",
             ctaPrimary: "Me envie um Email",
             ctaSecondary: "LinkedIn",
-            copyright: "© 2024 Brendo. Todos os direitos reservados."
+            copyright: "© 2026 Brendo. Todos os direitos reservados."
         }
     },
     en: {
@@ -96,13 +113,13 @@ export const DATA = {
             { name: "Contact", href: "#contact" },
         ],
         hero: {
-            greeting: "Hello, I'm",
-            name: "Brendo",
-            role: "Data Scientist & Statistician",
-            description: "Specialist in Linux, automation, and data analysis. Focused on data engineering and systems integration.",
-            badge: "Available for work",
-            ctaPrimary: "Contact Me",
-            ctaSecondary: "View Work"
+            greeting: "user@brendo:~$",
+            name: "whoami",
+            role: "Brendo Bittencourt",
+            description: "Statistics | Linux | Automation",
+            badge: "System Status: ONLINE",
+            ctaPrimary: "Execute Project",
+            ctaSecondary: "Access Logs"
         },
         experience: {
             title: "Work Experience",
@@ -140,13 +157,24 @@ export const DATA = {
                     institution: "Descomplica Faculdade Digital",
                     degree: "Technologist in Data Science",
                     period: "2024 - 2026",
-                    description: "Studying Data Science, focusing on data analysis, machine learning, and data engineering.",
+                    description: "Emphasis on applied practice and tools",
+                },
+                {
+                    institution: "UNIFACS - Universidade Salvador",
+                    degree: "Bachelor's Degree in Statistics",
+                    period: "2024 - 2028",
+                    description: "Specialization in mathematical foundations and inference.",
                 },
             ]
         },
         skills: {
             title: "Skills & Differentials",
-            subtitle: "Technical stack organized by area of expertise"
+            subtitle: "Technical stack organized by area of expertise",
+            groups: [
+                { category: "Development" },
+                { category: "Data & Infra" },
+                { category: "Differentials" }
+            ]
         },
         projects: {
             title: "Featured Projects",
@@ -163,6 +191,12 @@ export const DATA = {
                     tech: ["Python", "Shell", "SQL"],
                     link: "#",
                 },
+                {
+                    title: "Data Automation",
+                    description: "Scripts for data extraction and transformation using Python and Shell Script.",
+                    tech: ["Python", "Shell", "SQL"],
+                    link: "#",
+                },
             ]
         },
         footer: {
@@ -170,7 +204,7 @@ export const DATA = {
             subtitle: "Currently open for new opportunities and collaborations.",
             ctaPrimary: "Email Me",
             ctaSecondary: "LinkedIn",
-            copyright: "© 2024 Brendo. All rights reserved."
+            copyright: "© 2026 Brendo. All rights reserved."
         }
     }
 };
