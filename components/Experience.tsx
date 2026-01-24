@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { DATA } from "@/lib/data";
 import { useLanguage } from "@/lib/language-context";
+import { cn } from "@/lib/utils";
 
 export function Experience() {
     const { language } = useLanguage();
@@ -20,68 +21,109 @@ export function Experience() {
                 </motion.h2>
 
                 <div className="relative border-l border-zinc-800 ml-4 md:ml-0 space-y-12">
-                    {t.items.map((item: any, index: number) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ delay: index * 0.1 }}
-                            className="relative ml-8 md:ml-12"
-                        >
-                            {/* Dot */}
-                            <div className="absolute -left-[41px] md:-left-[57px] top-1.5 h-4 w-4 rounded-full border border-zinc-800 bg-black box-content p-0.5">
-                                <div className="h-full w-full rounded-full bg-zinc-600 group-hover:bg-white" />
-                            </div>
+                    {DATA.pt.experience.items.map((_, index) => {
+                        const itemPT = DATA.pt.experience.items[index];
+                        const itemEN = DATA.en.experience.items[index];
+                        const items = { pt: itemPT, en: itemEN };
 
-                            {/* Minimalist Card */}
-                            <div className="rounded border border-zinc-900 bg-black p-6 transition-all hover:border-zinc-700">
-                                <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between mb-6">
-                                    <h3 className="text-lg font-bold text-white font-mono">
-                                        {item.role}
-                                    </h3>
-                                    <span className="text-xs text-zinc-500 font-mono tracking-wider">{item.period}</span>
+                        return (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                transition={{ delay: index * 0.1 }}
+                                className="relative ml-8 md:ml-12"
+                            >
+                                {/* Dot */}
+                                <div className="absolute -left-[41px] md:-left-[57px] top-1.5 h-4 w-4 rounded-full border border-zinc-800 bg-black box-content p-0.5">
+                                    <div className="h-full w-full rounded-full bg-zinc-600 group-hover:bg-white" />
                                 </div>
-                                <p className="text-sm text-zinc-400 mb-6 font-medium border-l-2 border-zinc-800 pl-3">{item.company}</p>
 
-                                {item.context ? (
-                                    <div className="space-y-4">
-                                        <div className="grid gap-2">
-                                            <span className="text-[10px] uppercase tracking-widest text-zinc-600 font-bold">Contexto</span>
-                                            <p className="text-sm text-zinc-400 leading-relaxed border-l border-zinc-900 pl-3">
-                                                {item.context}
-                                            </p>
-                                        </div>
-                                        <div className="grid gap-2">
-                                            <span className="text-[10px] uppercase tracking-widest text-zinc-600 font-bold">Ação</span>
-                                            <p className="text-sm text-zinc-300 leading-relaxed border-l border-zinc-800 pl-3">
-                                                {item.action}
-                                            </p>
-                                        </div>
-                                        <div className="grid gap-2">
-                                            <span className="text-[10px] uppercase tracking-widest text-zinc-600 font-bold">Aprendizado</span>
-                                            <p className="text-sm text-zinc-400 italic leading-relaxed border-l border-zinc-900 pl-3">
-                                                {item.learning}
-                                            </p>
-                                        </div>
+                                {/* Minimalist Card Container */}
+                                <div className="relative rounded border border-zinc-900 bg-black p-6 transition-all hover:border-zinc-700">
+                                    {/* Grid to overlap PT and EN versions */}
+                                    <div className="grid">
+                                        {/* Render both languages to force max height */}
+                                        {(["pt", "en"] as const).map((langKey) => {
+                                            const item = items[langKey];
+                                            const isActive = language === langKey;
 
-                                        {item.stack && (
-                                            <div className="pt-4 flex flex-wrap gap-2">
-                                                {item.stack.map((tech: string, i: number) => (
-                                                    <span key={i} className="px-2 py-1 bg-zinc-900 border border-zinc-800 rounded text-[10px] text-zinc-400 uppercase tracking-wider font-mono">
-                                                        {tech}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        )}
+                                            return (
+                                                <div
+                                                    key={langKey}
+                                                    className={cn(
+                                                        "col-start-1 row-start-1 flex flex-col transition-opacity duration-300",
+                                                        isActive ? "opacity-100 z-10" : "opacity-0 -z-10 invisible" // invisible keeps layout size!
+                                                        // Wait, invisible removes it from accessibility tree but KEEPS layout. 
+                                                        // However, checking logic: 'invisible' in tailwind is visibility: hidden.
+                                                        // This layout strategy is perfect for "adapting to the largest".
+                                                    )}
+                                                    // We also need to conditionally disable pointer events on the hidden one
+                                                    aria-hidden={!isActive}
+                                                >
+                                                    <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between mb-6">
+                                                        <h3 className="text-lg font-bold text-white font-mono">
+                                                            {item.role}
+                                                        </h3>
+                                                        <span className="text-xs text-zinc-500 font-mono tracking-wider">{item.period}</span>
+                                                    </div>
+                                                    <p className="text-sm text-zinc-400 mb-6 font-medium border-l-2 border-zinc-800 pl-3">{item.company}</p>
+
+                                                    <div className="flex-grow space-y-6">
+                                                        {item.context ? (
+                                                            <>
+                                                                <div className="grid gap-2">
+                                                                    <span className="text-[10px] uppercase tracking-widest text-zinc-600 font-bold">
+                                                                        {langKey === 'pt' ? 'Contexto' : 'Context'}
+                                                                    </span>
+                                                                    <p className="text-sm text-zinc-400 leading-relaxed border-l border-zinc-900 pl-3">
+                                                                        {item.context}
+                                                                    </p>
+                                                                </div>
+                                                                <div className="grid gap-2">
+                                                                    <span className="text-[10px] uppercase tracking-widest text-zinc-600 font-bold">
+                                                                        {langKey === 'pt' ? 'Ação' : 'Action'}
+                                                                    </span>
+                                                                    <p className="text-sm text-zinc-300 leading-relaxed border-l border-zinc-800 pl-3">
+                                                                        {item.action}
+                                                                    </p>
+                                                                </div>
+                                                                <div className="grid gap-2">
+                                                                    <span className="text-[10px] uppercase tracking-widest text-zinc-600 font-bold">
+                                                                        {langKey === 'pt' ? 'Aprendizado' : 'Learning'}
+                                                                    </span>
+                                                                    <p className="text-sm text-zinc-400 italic leading-relaxed border-l border-zinc-900 pl-3">
+                                                                        {item.learning}
+                                                                    </p>
+                                                                </div>
+                                                            </>
+                                                        ) : (
+                                                            <p className="text-sm text-zinc-500 leading-relaxed">
+                                                                {item.description}
+                                                            </p>
+                                                        )}
+                                                    </div>
+
+                                                    {/* Stack Pinned to Bottom */}
+                                                    {item.stack && (
+                                                        <div className="pt-6 mt-auto border-t border-zinc-900/50">
+                                                            <div className="flex flex-wrap gap-2">
+                                                                {item.stack.map((tech: string, i: number) => (
+                                                                    <span key={i} className="px-2 py-1 bg-zinc-950 border border-zinc-900 rounded text-[10px] text-zinc-500 uppercase tracking-wider font-mono hover:text-zinc-300 transition-colors">
+                                                                        {tech}
+                                                                    </span>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            );
+                                        })}
                                     </div>
-                                ) : (
-                                    <p className="text-sm text-zinc-500 leading-relaxed">
-                                        {item.description}
-                                    </p>
-                                )}
-                            </div>
-                        </motion.div>
-                    ))}
+                                </div>
+                            </motion.div>
+                        );
+                    })}
                 </div>
             </div>
         </section>
