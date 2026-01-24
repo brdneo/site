@@ -97,11 +97,7 @@ export function Experience() {
                                                                     </p>
                                                                 </div>
                                                             </>
-                                                        ) : (
-                                                            <p className="text-sm text-zinc-500 leading-relaxed">
-                                                                {item.description}
-                                                            </p>
-                                                        )}
+                                                        ) : null}
                                                     </div>
 
                                                     {/* Stack Pinned to Bottom */}
