@@ -35,16 +35,50 @@ export function Experience() {
 
                             {/* Minimalist Card */}
                             <div className="rounded border border-zinc-900 bg-black p-6 transition-all hover:border-zinc-700">
-                                <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between mb-4">
+                                <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between mb-6">
                                     <h3 className="text-lg font-bold text-white font-mono">
                                         {item.role}
                                     </h3>
                                     <span className="text-xs text-zinc-500 font-mono tracking-wider">{item.period}</span>
                                 </div>
-                                <p className="text-sm text-zinc-400 mb-2 font-medium border-l-2 border-zinc-800 pl-3">{item.company}</p>
-                                <p className="text-sm text-zinc-500 leading-relaxed">
-                                    {item.description}
-                                </p>
+                                <p className="text-sm text-zinc-400 mb-6 font-medium border-l-2 border-zinc-800 pl-3">{item.company}</p>
+
+                                {item.context ? (
+                                    <div className="space-y-4">
+                                        <div className="grid gap-2">
+                                            <span className="text-[10px] uppercase tracking-widest text-zinc-600 font-bold">Contexto</span>
+                                            <p className="text-sm text-zinc-400 leading-relaxed border-l border-zinc-900 pl-3">
+                                                {item.context}
+                                            </p>
+                                        </div>
+                                        <div className="grid gap-2">
+                                            <span className="text-[10px] uppercase tracking-widest text-zinc-600 font-bold">Ação</span>
+                                            <p className="text-sm text-zinc-300 leading-relaxed border-l border-zinc-800 pl-3">
+                                                {item.action}
+                                            </p>
+                                        </div>
+                                        <div className="grid gap-2">
+                                            <span className="text-[10px] uppercase tracking-widest text-zinc-600 font-bold">Aprendizado</span>
+                                            <p className="text-sm text-zinc-400 italic leading-relaxed border-l border-zinc-900 pl-3">
+                                                {item.learning}
+                                            </p>
+                                        </div>
+
+                                        {item.stack && (
+                                            <div className="pt-4 flex flex-wrap gap-2">
+                                                {item.stack.map((tech: string, i: number) => (
+                                                    <span key={i} className="px-2 py-1 bg-zinc-900 border border-zinc-800 rounded text-[10px] text-zinc-400 uppercase tracking-wider font-mono">
+                                                        {tech}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+                                ) : (
+                                    <p className="text-sm text-zinc-500 leading-relaxed">
+                                        {item.description}
+                                    </p>
+                                )}
                             </div>
                         </motion.div>
                     ))}
