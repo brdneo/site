@@ -4,17 +4,17 @@ import { motion } from "framer-motion";
 import { DATA } from "@/lib/data";
 import { useLanguage } from "@/lib/language-context";
 import {
-    SiLinkedin, SiDiscord, SiGithub, SiYoutube, SiSpotify, SiGmail
+    SiLinkedin, SiDiscord, SiGithub, SiYoutube, SiWhatsapp, SiGmail
 } from "react-icons/si";
 import { cn } from "@/lib/utils";
 
 const SOCIALS = [
-    { name: "Email", icon: SiGmail, color: "#EA4335", link: "mailto:brendo@example.com" },
+    { name: "Email", icon: SiGmail, color: "#EA4335", link: "mailto:brdueo@gmai.com" },
     { name: "LinkedIn", icon: SiLinkedin, color: "#0077B5", link: "https://linkedin.com/in/brdneo" },
     { name: "Discord", icon: SiDiscord, color: "#5865F2", link: "https://discord.com/users/1058427557491507250" },
     { name: "GitHub", icon: SiGithub, color: "#181717", link: "https://github.com/brdneo" },
     { name: "YouTube", icon: SiYoutube, color: "#FF0000", link: "https://youtube.com/@brdneo" },
-    { name: "Spotify", icon: SiSpotify, color: "#1DB954", link: "https://open.spotify.com/user/zm391kg8wp3eo2x8ak09xkwrd?si=HLO_EMxETzqGyHVffi7NgQ" },
+    { name: "WhatsApp", icon: SiWhatsapp, color: "#25D366", link: "https://wa.me/5571996070108" },
 ];
 
 export function Footer() {
@@ -27,7 +27,7 @@ export function Footer() {
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    className="mb-8 text-3xl font-bold text-white tracking-tight"
+                    className="mb-8 text-2xl font-bold text-white tracking-tight"
                 >
                     {t.title}
                 </motion.h2>

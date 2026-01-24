@@ -53,21 +53,21 @@ export function Experience() {
                                                     key={langKey}
                                                     className={cn(
                                                         "col-start-1 row-start-1 flex flex-col transition-opacity duration-300",
-                                                        isActive ? "opacity-100 z-10" : "opacity-0 -z-10 invisible" // invisible keeps layout size!
-                                                        // Wait, invisible removes it from accessibility tree but KEEPS layout. 
-                                                        // However, checking logic: 'invisible' in tailwind is visibility: hidden.
-                                                        // This layout strategy is perfect for "adapting to the largest".
+                                                        isActive ? "opacity-100 z-10" : "opacity-0 -z-10 invisible"
                                                     )}
-                                                    // We also need to conditionally disable pointer events on the hidden one
                                                     aria-hidden={!isActive}
                                                 >
-                                                    <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between mb-6">
-                                                        <h3 className="text-lg font-bold text-white font-mono">
-                                                            {item.role}
-                                                        </h3>
-                                                        <span className="text-xs text-zinc-500 font-mono tracking-wider">{item.period}</span>
+                                                    <div className="relative z-10 flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between mb-6">
+                                                        <div>
+                                                            <h3 className="text-lg font-bold text-white font-mono leading-tight">
+                                                                {item.role}
+                                                            </h3>
+                                                            <p className="text-sm text-zinc-400 font-medium">{item.company}</p>
+                                                        </div>
+                                                        <span className="text-xs text-zinc-500 font-mono tracking-wider mt-1 sm:mt-0">{item.period}</span>
                                                     </div>
-                                                    <p className="text-sm text-zinc-400 mb-6 font-medium border-l-2 border-zinc-800 pl-3">{item.company}</p>
+
+                                                    {/* Legacy company prop removed from standalone paragraph to avoid duplication */}
 
                                                     <div className="flex-grow space-y-6">
                                                         {item.context ? (
