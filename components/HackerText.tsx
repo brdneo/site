@@ -5,64 +5,67 @@ import { useEffect, useState, useRef } from "react";
 interface HackerTextProps {
     text: string;
     className?: string;
-    speed?: number; // Speed in ms per frame
+    speed?: number;
 }
 
-export function HackerText({ text, className = "", speed = 30 }: HackerTextProps) {
+export function HackerText({ text, className = "", speed = 40 }: HackerTextProps) {
+    const elementRef = useRef<HTMLSpanElement>(null);
     const [displayText, setDisplayText] = useState(text);
-    const [isMounted, setIsMounted] = useState(false);
-
-    // Use a ref to track if we should animate (to avoid strict mode double-firing issues affecting visual start)
-    const startedRef = useRef(false);
+    const [hasAnimated, setHasAnimated] = useState(false);
 
     useEffect(() => {
-        setIsMounted(true);
-        // Start with a localized scrambled state to avoid flash of original text
-        const scramble = () => text.split("").map(char => char === " " ? " " : Math.random() > 0.5 ? "1" : "0").join("");
-        setDisplayText(scramble());
-    }, [text]);
+        // Step 1: Immediately scramble on mount so user sees binary waiting
+        const scramble = text.split("").map(char => char === " " ? " " : Math.random() > 0.5 ? "1" : "0").join("");
+        setDisplayText(scramble);
 
-    useEffect(() => {
-        if (!isMounted) return;
+        // Step 2: Use vanilla IntersectionObserver to detect visibility
+        const observer = new IntersectionObserver((entries) => {
+            const [entry] = entries;
+            if (entry.isIntersecting && !hasAnimated) {
+                setHasAnimated(true);
 
-        // Short delay before starting the decode to let the user see the binary
-        const startDelay = setTimeout(() => {
-            let iterations = 0;
+                // Start Decoding Loop
+                let iterations = 0;
+                const interval = setInterval(() => {
+                    setDisplayText(() => {
+                        return text
+                            .split("")
+                            .map((char, index) => {
+                                if (index < iterations) {
+                                    return char;
+                                }
+                                if (char === " ") return " ";
+                                return Math.random() > 0.5 ? "1" : "0";
+                            })
+                            .join("");
+                    });
 
-            const interval = setInterval(() => {
-                setDisplayText(prev => {
-                    return text
-                        .split("")
-                        .map((char, index) => {
-                            if (index < iterations) {
-                                return char;
-                            }
+                    iterations += 1 / 3;
 
-                            // Return random binary for unscrambled parts
-                            // Keep spaces as spaces for layout stability
-                            if (char === " ") return " ";
-                            return Math.random() > 0.5 ? "1" : "0";
-                        })
-                        .join("");
-                });
+                    if (iterations >= text.length) {
+                        clearInterval(interval);
+                        setDisplayText(text);
+                    }
+                }, speed);
 
-                // Decode speed: reveal 1 character every 3 frames (adjust for smoothness)
-                iterations += 1 / 3;
+                // Cleanup interval works via closure, but we also disconnect observer
+                observer.disconnect();
+            }
+        }, {
+            threshold: 0.1, // Trigger when 10% visible
+        });
 
-                if (iterations > text.length) {
-                    clearInterval(interval);
-                    setDisplayText(text); // Ensure final state is clean
-                }
-            }, speed);
+        if (elementRef.current) {
+            observer.observe(elementRef.current);
+        }
 
-            return () => clearInterval(interval);
-        }, 500); // 500ms of pure binary scramble
-
-        return () => clearTimeout(startDelay);
-    }, [text, speed, isMounted]);
+        return () => {
+            observer.disconnect();
+        };
+    }, [text, speed, hasAnimated]);
 
     return (
-        <span className={className}>
+        <span ref={elementRef} className={className}>
             {displayText}
         </span>
     );

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { DATA } from "@/lib/data";
 import { useLanguage } from "@/lib/language-context";
 import { HackerText } from "@/components/HackerText";
+import { ChevronDown } from "lucide-react";
 
 export function Hero() {
     const { language } = useLanguage();
@@ -89,6 +90,19 @@ export function Hero() {
                         {t.ctaSecondary}
                     </a>
                 </motion.div>
+
+            </motion.div>
+
+            {/* Scroll Indicator - Bottom of Viewport */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.2, duration: 1 }}
+                className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20"
+            >
+                <div className="animate-bounce">
+                    <ChevronDown className="h-6 w-6 text-zinc-500" />
+                </div>
             </motion.div>
         </section>
     );

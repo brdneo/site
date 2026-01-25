@@ -18,6 +18,7 @@ export const metadata: Metadata = {
 };
 
 import { Navbar } from "@/components/Navbar";
+import { GlitchOverlay } from "@/components/GlitchOverlay";
 import { LanguageProvider } from "@/lib/language-context";
 
 export default function RootLayout({
@@ -31,6 +32,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground selection:bg-white/20`}
       >
         <LanguageProvider>
+          <GlitchOverlay />
           <Navbar />
           {children}
         </LanguageProvider>
