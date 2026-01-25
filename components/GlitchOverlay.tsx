@@ -20,7 +20,23 @@ export function GlitchOverlay() {
         };
 
         const triggerGlitch = () => {
-            setIsVisible(true);
+            const now = new Date();
+            const hour = now.getHours();
+            const minute = now.getMinutes();
+
+            // Check if time is between 00:59 and 04:59
+            const isTime = (hour === 0 && minute >= 59) || (hour >= 1 && hour < 5);
+
+            if (isTime) {
+                setIsVisible(true);
+            }
+
+            // If not time, we skip setting visible, but we still generate content/schedule next
+            // actually if not time, we just schedule next and return early to save resources
+            if (!isTime) {
+                scheduleGlitch();
+                return;
+            }
 
             // Generate random terminal "noise"
             const lines = [];
