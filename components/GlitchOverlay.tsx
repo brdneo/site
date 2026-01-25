@@ -25,7 +25,7 @@ export function GlitchOverlay() {
             const minute = now.getMinutes();
 
             // Check if time is between 00:59 and 04:59
-            const isTime = (hour === 0 && minute >= 01) || (hour >= 1 && hour < 5);
+            const isTime = (hour === 0 && minute >= 1) || (hour >= 1 && hour < 5);
 
             if (isTime) {
                 setIsVisible(true);
