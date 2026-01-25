@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { DATA } from "@/lib/data";
 import { useLanguage } from "@/lib/language-context";
+import { HackerText } from "@/components/HackerText";
 import {
     SiLinkedin, SiDiscord, SiGithub, SiYoutube, SiWhatsapp, SiGmail
 } from "react-icons/si";
@@ -29,7 +30,7 @@ export function Footer() {
                     whileInView={{ opacity: 1, y: 0 }}
                     className="mb-8 text-2xl font-bold text-white tracking-tight"
                 >
-                    {t.title}
+                    <HackerText text={t.title} />
                 </motion.h2>
 
                 <p className="mb-16 text-zinc-500 text-sm">

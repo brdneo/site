@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { DATA } from "@/lib/data";
 import { useLanguage } from "@/lib/language-context";
 import { cn } from "@/lib/utils";
+import { HackerText } from "@/components/HackerText";
 
 export function Experience() {
     const { language } = useLanguage();
@@ -17,7 +18,7 @@ export function Experience() {
                     whileInView={{ opacity: 1, y: 0 }}
                     className="mb-16 text-center text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60"
                 >
-                    {t.title}
+                    <HackerText text={t.title} />
                 </motion.h2>
 
                 <div className="relative border-l border-zinc-800 ml-4 md:ml-0 space-y-12">

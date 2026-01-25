@@ -10,6 +10,7 @@ import { GrDatabase } from "react-icons/gr";
 import { BsTerminal } from "react-icons/bs";
 import { cn } from "@/lib/utils";
 import { DATA } from "@/lib/data";
+import { HackerText } from "@/components/HackerText";
 import { useLanguage } from "@/lib/language-context";
 
 // Only items remain hardcoded as they are proper nouns, but keys must match index of content in data.ts
@@ -50,7 +51,9 @@ export function Skills() {
     return (
         <section id="skills" className="py-24 space-y-12 overflow-hidden bg-black border-y border-zinc-900 font-mono">
             <div className="text-center px-4">
-                <h2 className="text-3xl font-bold text-white mb-4 tracking-tight">{t.title}</h2>
+                <h2 className="text-3xl font-bold text-white mb-4 tracking-tight">
+                    <HackerText text={t.title} />
+                </h2>
                 <p className="text-zinc-500 text-sm">{t.subtitle}</p>
             </div>
 

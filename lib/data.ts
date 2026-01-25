@@ -9,7 +9,7 @@ export const DATA = {
             { name: "Contato", href: "#contact" },
         ],
         hero: {
-            greeting: "user@brendo:~$",
+            greeting: "brendo@archlinux:~$",
             name: "whoami",
             role: "Brendo Bittencourt",
             description: "Estatística | Linux | Automação",
@@ -91,7 +91,7 @@ export const DATA = {
             ]
         },
         projects: {
-            title: "Projetos em Destaque",
+            title: "Projetos práticos",
             items: [
                 {
                     title: "Dashboard Operacional",
@@ -131,7 +131,7 @@ export const DATA = {
             { name: "Contact", href: "#contact" },
         ],
         hero: {
-            greeting: "user@brendo:~$",
+            greeting: "brendo@archlinux:~$",
             name: "whoami",
             role: "Brendo Bittencourt",
             description: "Statistics | Linux | Automation",
@@ -213,7 +213,7 @@ export const DATA = {
             ]
         },
         projects: {
-            title: "Featured Projects",
+            title: "Practical Projects",
             items: [
                 {
                     title: "Operational Decision Dashboard",

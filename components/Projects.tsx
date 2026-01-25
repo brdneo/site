@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { DATA } from "@/lib/data";
 import { useLanguage } from "@/lib/language-context";
+import { HackerText } from "@/components/HackerText";
 
 export function Projects() {
     const { language } = useLanguage();
@@ -16,7 +17,7 @@ export function Projects() {
                     whileInView={{ opacity: 1, y: 0 }}
                     className="mb-16 text-center text-4xl font-bold text-white"
                 >
-                    {t.title}
+                    <HackerText text={t.title} />
                 </motion.h2>
 
                 <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">

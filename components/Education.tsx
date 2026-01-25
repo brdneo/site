@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { DATA } from "@/lib/data";
 import { useLanguage } from "@/lib/language-context";
+import { HackerText } from "@/components/HackerText";
 
 import Link from "next/link";
 
@@ -18,7 +19,7 @@ export function Education() {
                     whileInView={{ opacity: 1, y: 0 }}
                     className="mb-16 text-center text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-500"
                 >
-                    {t.title}
+                    <HackerText text={t.title} />
                 </motion.h2>
 
                 <div className="grid gap-6 md:grid-cols-1">
