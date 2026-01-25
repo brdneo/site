@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { DATA } from "@/lib/data";
 import { useLanguage } from "@/lib/language-context";
+import { HackerText } from "@/components/HackerText";
 
 export function Hero() {
     const { language } = useLanguage();
@@ -53,7 +54,7 @@ export function Hero() {
                         transition={{ delay: 0.4 }}
                         className="text-3xl sm:text-5xl md:text-8xl font-bold tracking-tighter text-white"
                     >
-                        {t.role}
+                        <HackerText text={t.role} className="break-words" />
                     </motion.h1>
 
                     {/* Subtext with Terminal Divider */}
@@ -73,17 +74,17 @@ export function Hero() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.8 }}
-                    className="flex flex-col sm:flex-row justify-center gap-6 pt-16"
+                    className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-16 max-w-md mx-auto w-full"
                 >
                     <a
                         href="#contact"
-                        className="group relative inline-flex h-12 items-center justify-center bg-white text-black px-8 text-sm font-bold tracking-widest uppercase transition-transform hover:scale-105"
+                        className="group relative inline-flex h-12 w-full items-center justify-center bg-white text-black px-4 text-sm font-bold tracking-widest uppercase transition-transform hover:scale-105"
                     >
                         {t.ctaPrimary}
                     </a>
                     <a
                         href="#projects"
-                        className="inline-flex h-12 items-center justify-center border border-zinc-800 bg-black px-8 text-sm font-medium text-zinc-400 uppercase tracking-widest transition-colors hover:border-zinc-600 hover:text-white"
+                        className="inline-flex h-12 w-full items-center justify-center border border-zinc-800 bg-black px-4 text-sm font-medium text-zinc-400 uppercase tracking-widest transition-colors hover:border-zinc-600 hover:text-white"
                     >
                         {t.ctaSecondary}
                     </a>

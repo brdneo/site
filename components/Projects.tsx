@@ -26,11 +26,11 @@ export function Projects() {
                             initial={{ opacity: 0, scale: 0.95 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             transition={{ delay: index * 0.1 }}
-                            className="group relative overflow-hidden rounded bg-black border border-zinc-900 hover:border-zinc-600 transition-all duration-300 flex flex-col h-full"
+                            className="group relative overflow-hidden rounded bg-black border border-zinc-900 hover:border-zinc-600 transition-all duration-300 flex flex-col h-full min-h-[450px]"
                         >
                             <div className="p-8 flex flex-col h-full">
-                                <h3 className="text-xl font-bold text-white mb-2 font-mono">{project.title}</h3>
-                                <p className="text-zinc-500 text-sm mb-6 line-clamp-3 leading-relaxed flex-grow">{project.description}</p>
+                                <h3 className="text-xl font-bold text-white mb-2 font-mono h-14">{project.title}</h3>
+                                <p className="text-zinc-500 text-sm mb-6 leading-relaxed flex-grow">{project.description}</p>
 
                                 <div className="flex flex-wrap gap-2 mb-8 mt-auto">
                                     {project.tech.map((tech: string, i: number) => (
