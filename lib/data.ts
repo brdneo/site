@@ -22,7 +22,7 @@ export const DATA = {
             items: [
                 {
                     company: "Efetiva Distribuição",
-                    role: "Analista de Dados Junior",
+                    role: "Analista de Dados",
                     period: "01/2024 - 01/2026",
                     logo: "/logos/efetiva.png",
                     context: "Ambiente corporativo em fase de consolidação sistêmica após a recente implantação de um ERP, no qual dados operacionais passaram a ser centrais para decisões logísticas, financeiras e comerciais. Ao longo desse período, tornei-me a principal referência técnica e funcional do sistema dentro da empresa.",
@@ -144,7 +144,7 @@ export const DATA = {
             items: [
                 {
                     company: "Efetiva Distribuição",
-                    role: "Data Analyst Junior",
+                    role: "Data Analyst",
                     period: "01/2024 - 01/2026",
                     logo: "/logos/efetiva.png",
                     context: "Corporate environment in a systemic consolidation phase after the recent implementation of an ERP, where operational data became central to logistical, financial, and commercial decisions. Throughout this period, I became the main technical and functional system reference within the company.",
