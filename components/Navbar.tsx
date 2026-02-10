@@ -32,6 +32,8 @@ export function Navbar() {
         }
     }, [isOpen]);
 
+
+
     return (
         <>
             <motion.header

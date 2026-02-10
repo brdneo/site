@@ -15,7 +15,8 @@ export const DATA = {
             description: "Estatística | Linux | Automação",
             badge: "Status: DISPONÍVEL",
             ctaPrimary: "Executar Projeto",
-            ctaSecondary: "Acessar Logs"
+            ctaSecondary: "Acessar Logs",
+            email: "oi@brendo.dev"
         },
         experience: {
             title: "Experiência Profissional",
@@ -137,7 +138,8 @@ export const DATA = {
             description: "Statistics | Linux | Automation",
             badge: "Status: AVAILABLE",
             ctaPrimary: "Execute Project",
-            ctaSecondary: "Access Logs"
+            ctaSecondary: "Access Logs",
+            email: "hi@brendo.dev"
         },
         experience: {
             title: "Work Experience",

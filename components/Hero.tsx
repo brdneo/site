@@ -91,6 +91,24 @@ export function Hero() {
                     </a>
                 </motion.div>
 
+                {/* Email - Quick Access */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1.0 }}
+                    className="flex justify-center mt-12"
+                >
+                    <a
+                        href={`mailto:${t.email}`}
+                        className="text-zinc-300 hover:text-white transition-colors text-lg font-mono flex items-center gap-2 group"
+                    >
+                        <span>{t.email}</span>
+                        <span className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                            ←
+                        </span>
+                    </a>
+                </motion.div>
+
             </motion.div>
 
             {/* Scroll Indicator - Bottom of Viewport */}
