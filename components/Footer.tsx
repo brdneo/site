@@ -5,15 +5,15 @@ import { DATA } from "@/lib/data";
 import { useLanguage } from "@/lib/language-context";
 import { HackerText } from "@/components/HackerText";
 import {
-    SiLinkedin, SiDiscord, SiGithub, SiYoutube, SiWhatsapp, SiGmail
+    SiLinkedin, SiDiscord, SiGithub, SiYoutube, SiWhatsapp, SiGmail, SiWakatime
 } from "react-icons/si";
 import { cn } from "@/lib/utils";
 
 const SOCIALS = [
     { name: "Email", icon: SiGmail, color: "#EA4335", link: "mailto:oi@brendo.dev" },
-    { name: "LinkedIn", icon: SiLinkedin, color: "#0077B5", link: "https://linkedin.com" },
+    { name: "WakaTime", icon: SiWakatime, color: "#FFFFFF", link: "https://wakatime.com/@brendo" },
     { name: "Discord", icon: SiDiscord, color: "#5865F2", link: "https://discord.com" },
-    { name: "GitHub", icon: SiGithub, color: "#181717", link: "https://github.com/brdneo" },
+    { name: "GitHub", icon: SiGithub, color: "#C0C0C0", link: "https://github.com/brdneo" },
     { name: "YouTube", icon: SiYoutube, color: "#FF0000", link: "https://youtube.com" },
     { name: "WhatsApp", icon: SiWhatsapp, color: "#25D366", link: "https://whatsapp.com" },
 ];
