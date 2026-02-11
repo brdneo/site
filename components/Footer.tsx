@@ -13,7 +13,7 @@ const SOCIALS = [
     { name: "Email", icon: SiGmail, color: "#EA4335", link: "mailto:oi@brendo.dev" },
     { name: "LinkedIn", icon: SiLinkedin, color: "#0077B5", link: "https://linkedin.com" },
     { name: "Discord", icon: SiDiscord, color: "#5865F2", link: "https://discord.com" },
-    { name: "GitHub", icon: SiGithub, color: "#181717", link: "https://github.com" },
+    { name: "GitHub", icon: SiGithub, color: "#181717", link: "https://github.com/brdneo" },
     { name: "YouTube", icon: SiYoutube, color: "#FF0000", link: "https://youtube.com" },
     { name: "WhatsApp", icon: SiWhatsapp, color: "#25D366", link: "https://whatsapp.com" },
 ];
