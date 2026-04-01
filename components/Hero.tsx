@@ -53,9 +53,9 @@ export function Hero() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.4 }}
-                        className="text-3xl sm:text-5xl md:text-8xl font-bold tracking-tighter text-white"
+                        className="text-2xl sm:text-5xl md:text-8xl font-bold tracking-tighter text-white whitespace-nowrap"
                     >
-                        <HackerText text={t.role} className="break-words" />
+                        <HackerText text={t.role} />
                     </motion.h1>
 
                     {/* Subtext with Terminal Divider */}
