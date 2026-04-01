@@ -12,10 +12,10 @@ import { cn } from "@/lib/utils";
 const SOCIALS = [
     { name: "Email", icon: SiGmail, color: "#EA4335", link: "mailto:oi@brendo.dev" },
     { name: "WakaTime", icon: SiWakatime, color: "#FFFFFF", link: "https://wakatime.com/@brendo" },
-    { name: "Discord", icon: SiDiscord, color: "#5865F2", link: "https://discord.com" },
+    { name: "LinkedIn", icon: SiLinkedin, color: "#0A66C2", link: "https://linkedin.com/in/brdneo" },
     { name: "GitHub", icon: SiGithub, color: "#C0C0C0", link: "https://github.com/brdneo" },
     { name: "YouTube", icon: SiYoutube, color: "#FF0000", link: "https://youtube.com" },
-    { name: "WhatsApp", icon: SiWhatsapp, color: "#25D366", link: "https://whatsapp.com" },
+    { name: "WhatsApp", icon: SiWhatsapp, color: "#25D366", link: "https://wa.me/5571996070108" },
 ];
 
 export function Footer() {
