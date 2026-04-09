@@ -11,16 +11,16 @@ export function Hero() {
     const t = DATA[language].hero;
 
     return (
-        <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 text-center bg-black font-mono selection:bg-white selection:text-black">
+        <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 text-center bg-black font-mono selection:bg-white selection:text-black" >
 
             {/* Digital Night Background */}
-            <div className="absolute inset-0 bg-black">
+            < div className="absolute inset-0 bg-black" >
                 {/* Subtle Grid */}
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
+                < div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
 
                 {/* "Moon" / Glow Source */}
-                <div className="absolute top-1/4 left-1/2 -translate-x-1/2 h-[500px] w-[500px] rounded-full bg-white/[0.03] blur-[120px]" />
-            </div>
+                < div className="absolute top-1/4 left-1/2 -translate-x-1/2 h-[500px] w-[500px] rounded-full bg-white/[0.03] blur-[120px]" />
+            </div >
 
             <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -122,6 +122,6 @@ export function Hero() {
                     <ChevronDown className="h-6 w-6 text-zinc-500" />
                 </div>
             </motion.div>
-        </section>
+        </section >
     );
 }

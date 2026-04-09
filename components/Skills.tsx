@@ -49,17 +49,16 @@ export function Skills() {
     const t = DATA[language].skills;
 
     return (
-        <section id="skills" className="py-24 space-y-12 overflow-hidden bg-black border-y border-zinc-900 font-mono">
-            <div className="text-center px-4">
+        <section id="skills" className="py-24 px-4 overflow-hidden bg-black border-y border-zinc-900 font-mono">
+            <div className="mx-auto max-w-4xl text-center">
                 <h2 className="text-3xl font-bold text-white mb-4 tracking-tight">
                     <HackerText text={t.title} />
                 </h2>
-                <p className="text-zinc-500 text-sm">{t.subtitle}</p>
-            </div>
+                <p className="text-zinc-500 text-sm mb-12">{t.subtitle}</p>
 
-            <div className="relative w-full overflow-hidden mask-gradient-x py-10">
-                <div className="flex w-fit animate-marquee hover:[animation-play-state:paused] gap-12 px-4 items-start">
-                    {/* Marquee Content */}
+                <div className="relative w-full overflow-hidden mask-gradient-x py-10">
+                    <div className="flex w-fit animate-marquee hover:[animation-play-state:paused] gap-12 px-4 items-start">
+                        {/* Marquee Content */}
                     {[0, 1, 2, 0, 1, 2].map((groupIndex, idx) => {
                         const groupData = t.groups[groupIndex]; // Get translated category name
                         const items = SKILL_ITEMS[groupIndex]; // Get icons/items
@@ -105,6 +104,7 @@ export function Skills() {
                         );
                     })}
                 </div>
+            </div>
             </div>
         </section>
     );

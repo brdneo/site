@@ -3,9 +3,9 @@ export const DATA = {
         nav: [
             { name: "Sobre", href: "#about" },
             { name: "Habilidades", href: "#skills" },
+            { name: "Formação", href: "#education" },
             { name: "Experiência", href: "#experience" },
             { name: "Projetos", href: "#projects" },
-            { name: "Formação", href: "#education" },
             { name: "Contato", href: "#contact" },
         ],
         hero: {
@@ -126,9 +126,9 @@ export const DATA = {
         nav: [
             { name: "About", href: "#about" },
             { name: "Skills", href: "#skills" },
+            { name: "Education", href: "#education" },
             { name: "Experience", href: "#experience" },
             { name: "Projects", href: "#projects" },
-            { name: "Education", href: "#education" },
             { name: "Contact", href: "#contact" },
         ],
         hero: {
