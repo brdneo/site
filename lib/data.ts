@@ -11,8 +11,8 @@ export const DATA = {
         hero: {
             greeting: "brendo@archlinux:~$",
             name: "whoami",
-            role: "Brendo Bittencourt",
-            description: "Estatística | Linux | Automação",
+            role: "Brendo B.",
+            description: "Engenharia de Dados | Arquitetura em Nuvem | Pipelines de Dados",
             badge: "Status: DISPONÍVEL",
             ctaPrimary: "Executar Projeto",
             ctaSecondary: "Acessar Logs",
@@ -134,8 +134,8 @@ export const DATA = {
         hero: {
             greeting: "brendo@archlinux:~$",
             name: "whoami",
-            role: "Brendo Bittencourt",
-            description: "Statistics | Linux | Automation",
+            role: "Brendo B.",
+            description: "Data Engineering | Cloud Architecture | Data Pipelines",
             badge: "Status: AVAILABLE",
             ctaPrimary: "Execute Project",
             ctaSecondary: "Access Logs",

@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { DATA } from "@/lib/data";
 import { useLanguage } from "@/lib/language-context";
-import { HackerText } from "@/components/HackerText";
 import { ChevronDown } from "lucide-react";
 
 export function Hero() {
@@ -53,9 +52,20 @@ export function Hero() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.4 }}
-                        className="text-2xl sm:text-5xl md:text-8xl font-bold tracking-tighter text-white whitespace-nowrap"
+                        className="text-2xl sm:text-5xl md:text-8xl font-bold tracking-tighter text-white whitespace-nowrap cursor-default flex justify-center"
                     >
-                        <HackerText text={t.role} />
+                        <div className="group flex items-center">
+                            <span>Brendo&nbsp;</span>
+                            <span className="relative flex items-center">
+                                <span>B</span>
+                                <span className="max-w-0 overflow-hidden opacity-0 group-hover:max-w-[1000px] group-hover:opacity-100 transition-all duration-700 ease-in-out whitespace-nowrap">
+                                    ittencourt
+                                </span>
+                                <span className="max-w-[100px] group-hover:max-w-0 group-hover:opacity-0 overflow-hidden transition-all duration-500 ease-in-out">
+                                    .
+                                </span>
+                            </span>
+                        </div>
                     </motion.h1>
 
                     {/* Subtext with Terminal Divider */}
