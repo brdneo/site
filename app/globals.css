@@ -122,3 +122,70 @@
 .animate-blink {
   animation: blink 1s step-end infinite;
 }
+
+@keyframes scroll-line {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.animate-scroll-line {
+  animation: scroll-line 1.5s ease-in-out infinite;
+}
+
+/* Vertical writing for side indicators */
+.writing-vertical {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+/* Left side scroll indicator — pulses downward */
+@keyframes scroll-line-x-left {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.animate-scroll-line-x-left {
+  animation: scroll-line-x-left 1.5s ease-in-out infinite;
+}
+
+/* Right side scroll indicator — pulses upward */
+@keyframes scroll-line-x-right {
+  0% {
+    transform: translateY(100%);
+  }
+
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+.animate-scroll-line-x-right {
+  animation: scroll-line-x-right 1.5s ease-in-out infinite;
+}
+
+/* Subtle pulse for indicator chevrons */
+@keyframes pulse-subtle {
+
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 2s ease-in-out infinite;
+}
