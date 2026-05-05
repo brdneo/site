@@ -105,17 +105,50 @@ export function Hero() {
     return (
         <section className="relative flex h-screen flex-col items-center justify-center overflow-hidden px-6 md:px-4 text-center selection:bg-amber-900/20 selection:text-stone-900 grain" >
 
-            {/* Warm Background */}
-            <div className="absolute inset-0 bg-[#F8F4EF]">
-                {/* Subtle warm dot pattern */}
-                <div className="absolute inset-0 opacity-[0.15]" style={{
-                    backgroundImage: "radial-gradient(#C4B5A4 0.5px, transparent 0.5px)",
-                    backgroundSize: "24px 24px"
+            {/* ====== BACKGROUND — Retro minimalist layers ====== */}
+            <div className="absolute inset-0">
+
+                {/* Base — warm paper gradient with subtle variation */}
+                <div className="absolute inset-0" style={{
+                    background: "linear-gradient(165deg, #FAF6F0 0%, #F5EEE5 30%, #F8F3EC 50%, #F2EBE1 75%, #F6F0E8 100%)"
                 }} />
 
-                {/* Warm ambient glow */}
-                <div className="absolute top-1/3 left-1/2 -translate-x-1/2 h-[600px] w-[600px] rounded-full bg-[#C4956A]/[0.06] blur-[150px]" />
-                <div className="absolute bottom-1/4 right-1/4 h-[300px] w-[300px] rounded-full bg-[#8B7BAA]/[0.04] blur-[120px]" />
+                {/* Topographic contour rings — retro aesthetic, very faint */}
+                <svg className="absolute inset-0 w-full h-full opacity-[0.04]" preserveAspectRatio="none">
+                    {/* Large ring cluster — top right */}
+                    <circle cx="75%" cy="25%" r="180" fill="none" stroke="#B8A08A" strokeWidth="0.8" />
+                    <circle cx="75%" cy="25%" r="140" fill="none" stroke="#B8A08A" strokeWidth="0.6" />
+                    <circle cx="75%" cy="25%" r="100" fill="none" stroke="#B8A08A" strokeWidth="0.5" />
+                    <circle cx="75%" cy="25%" r="60" fill="none" stroke="#B8A08A" strokeWidth="0.4" />
+
+                    {/* Small ring cluster — bottom left */}
+                    <circle cx="20%" cy="70%" r="120" fill="none" stroke="#A0907A" strokeWidth="0.7" />
+                    <circle cx="20%" cy="70%" r="85" fill="none" stroke="#A0907A" strokeWidth="0.5" />
+                    <circle cx="20%" cy="70%" r="50" fill="none" stroke="#A0907A" strokeWidth="0.4" />
+
+                    {/* Tiny cluster — center left */}
+                    <circle cx="10%" cy="40%" r="45" fill="none" stroke="#C4B09A" strokeWidth="0.5" />
+                    <circle cx="10%" cy="40%" r="25" fill="none" stroke="#C4B09A" strokeWidth="0.3" />
+
+                    {/* Scattered arcs — mid right */}
+                    <circle cx="90%" cy="55%" r="70" fill="none" stroke="#B8A08A" strokeWidth="0.4" />
+                    <circle cx="90%" cy="55%" r="40" fill="none" stroke="#B8A08A" strokeWidth="0.3" />
+                </svg>
+
+                {/* Fine horizontal lines — like vintage paper texture */}
+                <div className="absolute inset-0 opacity-[0.025]" style={{
+                    backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 39px, #B8A08A 39px, #B8A08A 40px)",
+                }} />
+
+                {/* Warm ambient glows — depth and warmth */}
+                <div className="absolute top-[15%] right-[20%] h-[500px] w-[500px] rounded-full bg-[#C4956A]/[0.04] blur-[160px]" />
+                <div className="absolute bottom-[20%] left-[15%] h-[400px] w-[400px] rounded-full bg-[#D4A87A]/[0.05] blur-[140px]" />
+                <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full bg-[#F5EEE5]/[0.6] blur-[100px]" />
+
+                {/* Soft edge vignette */}
+                <div className="absolute inset-0" style={{
+                    background: "radial-gradient(ellipse at center, transparent 50%, rgba(232, 224, 216, 0.4) 100%)"
+                }} />
             </div>
 
             {/* ====== LEFT EDGE — Skills trigger zone (hidden on mobile) ====== */}
