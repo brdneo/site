@@ -35,13 +35,13 @@ export function LanguageToggle() {
     return (
         <button
             onClick={toggleLanguage}
-            className="relative flex h-8 w-16 items-center rounded-full bg-white/10 p-1 ring-1 ring-white/10 transition-colors hover:bg-white/20"
+            className="relative flex h-8 w-16 items-center rounded-full bg-stone-800/10 p-1 ring-1 ring-stone-300/50 transition-colors hover:bg-stone-800/15"
             aria-label="Toggle Language"
         >
             <motion.div
                 layout
                 transition={{ type: "spring", stiffness: 700, damping: 30 }}
-                className={`flex h-6 w-6 items-center justify-center rounded-full bg-white shadow-lg overflow-hidden ${language === "en" ? "translate-x-8" : "translate-x-0"}`}
+                className={`flex h-6 w-6 items-center justify-center rounded-full bg-white shadow-md overflow-hidden ring-1 ring-stone-200/50 ${language === "en" ? "translate-x-8" : "translate-x-0"}`}
             >
                 {language === "pt" ? <FlagBR /> : <FlagUK />}
             </motion.div>
