@@ -12,7 +12,7 @@ import {
 } from "react-icons/si";
 import { GrDatabase } from "react-icons/gr";
 import { TbSql, TbDatabase } from "react-icons/tb";
-import { Code, GraduationCap, ChevronLeft, ChevronRight } from "lucide-react";
+import { Code, GraduationCap, ChevronLeft, ChevronRight, X } from "lucide-react";
 
 const SOCIALS = [
     { name: "Email", icon: SiGmail, color: "#B54A32", link: "mailto:oi@brendo.dev" },
@@ -48,6 +48,13 @@ export function Hero() {
     const [currentTime, setCurrentTime] = useState("");
     const [uptimeDays, setUptimeDays] = useState(0);
     const bottomZoneRef = useRef<HTMLDivElement>(null);
+    // Parallax
+    const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
+    // Typewriter
+    const [typedChars, setTypedChars] = useState(0);
+    const [typewriterReady, setTypewriterReady] = useState(false);
+    // Mobile tabs
+    const [mobilePanel, setMobilePanel] = useState<null | "skills" | "education">(null);
 
     // Live clock
     useEffect(() => {
@@ -102,8 +109,44 @@ export function Hero() {
         };
     }, [handleWheel]);
 
+    // Typewriter effect
+    useEffect(() => {
+        setTypedChars(0);
+        const timer = setTimeout(() => setTypewriterReady(true), 800);
+        return () => { clearTimeout(timer); setTypewriterReady(false); };
+    }, [language]);
+
+    useEffect(() => {
+        if (!typewriterReady || !t.description) return;
+        if (typedChars >= t.description.length) return;
+        const timer = setTimeout(() => setTypedChars(c => c + 1), 40);
+        return () => clearTimeout(timer);
+    }, [typedChars, typewriterReady, t.description]);
+
+    // Keyboard shortcuts
+    useEffect(() => {
+        const onKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "ArrowLeft") { setShowSkills(p => !p); setShowEducation(false); }
+            else if (e.key === "ArrowRight") { setShowEducation(p => !p); setShowSkills(false); }
+            else if (e.key === "ArrowDown") setShowSocials(true);
+            else if (e.key === "ArrowUp") setShowSocials(false);
+            else if (e.key === "Escape") { setShowSkills(false); setShowEducation(false); setShowSocials(false); setMobilePanel(null); }
+        };
+        window.addEventListener("keydown", onKeyDown);
+        return () => window.removeEventListener("keydown", onKeyDown);
+    }, []);
+
+    // Parallax mouse handler
+    const handleMouseMove = useCallback((e: React.MouseEvent) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        setMousePos({
+            x: (e.clientX - rect.left) / rect.width - 0.5,
+            y: (e.clientY - rect.top) / rect.height - 0.5,
+        });
+    }, []);
+
     return (
-        <section className="relative flex h-screen flex-col items-center justify-center overflow-hidden px-6 md:px-4 text-center selection:bg-[#D4A373]/20 selection:text-[#3D2C1E] grain" >
+        <section className="relative flex h-screen flex-col items-center justify-center overflow-hidden px-6 md:px-4 text-center selection:bg-[#D4A373]/20 selection:text-[#3D2C1E] grain" onMouseMove={handleMouseMove}>
 
             {/* ====== BACKGROUND — Retro minimalist layers ====== */}
             <div className="absolute inset-0">
@@ -113,26 +156,27 @@ export function Hero() {
                     background: "linear-gradient(165deg, #FEFAE0 0%, #FAEDCD 25%, #FEFAE0 45%, #E9EDC9 70%, #FEFAE0 100%)"
                 }} />
 
-                {/* Topographic contour rings — retro aesthetic, very faint */}
+                {/* Topographic contour rings — parallax enabled */}
                 <svg className="absolute inset-0 w-full h-full opacity-[0.06]" preserveAspectRatio="none">
-                    {/* Large ring cluster — top right */}
-                    <circle cx="75%" cy="25%" r="180" fill="none" stroke="#CCD5AE" strokeWidth="0.8" />
-                    <circle cx="75%" cy="25%" r="140" fill="none" stroke="#CCD5AE" strokeWidth="0.6" />
-                    <circle cx="75%" cy="25%" r="100" fill="none" stroke="#CCD5AE" strokeWidth="0.5" />
-                    <circle cx="75%" cy="25%" r="60" fill="none" stroke="#CCD5AE" strokeWidth="0.4" />
-
-                    {/* Small ring cluster — bottom left */}
-                    <circle cx="20%" cy="70%" r="120" fill="none" stroke="#D4A373" strokeWidth="0.7" />
-                    <circle cx="20%" cy="70%" r="85" fill="none" stroke="#D4A373" strokeWidth="0.5" />
-                    <circle cx="20%" cy="70%" r="50" fill="none" stroke="#D4A373" strokeWidth="0.4" />
-
-                    {/* Tiny cluster — center left */}
-                    <circle cx="10%" cy="40%" r="45" fill="none" stroke="#CCD5AE" strokeWidth="0.5" />
-                    <circle cx="10%" cy="40%" r="25" fill="none" stroke="#CCD5AE" strokeWidth="0.3" />
-
-                    {/* Scattered arcs — mid right */}
-                    <circle cx="90%" cy="55%" r="70" fill="none" stroke="#D4A373" strokeWidth="0.4" />
-                    <circle cx="90%" cy="55%" r="40" fill="none" stroke="#D4A373" strokeWidth="0.3" />
+                    <g style={{ transform: `translate(${mousePos.x * 20}px, ${mousePos.y * 15}px)`, transition: "transform 0.3s ease-out" }}>
+                        <circle cx="75%" cy="25%" r="180" fill="none" stroke="#CCD5AE" strokeWidth="0.8" />
+                        <circle cx="75%" cy="25%" r="140" fill="none" stroke="#CCD5AE" strokeWidth="0.6" />
+                        <circle cx="75%" cy="25%" r="100" fill="none" stroke="#CCD5AE" strokeWidth="0.5" />
+                        <circle cx="75%" cy="25%" r="60" fill="none" stroke="#CCD5AE" strokeWidth="0.4" />
+                    </g>
+                    <g style={{ transform: `translate(${mousePos.x * -15}px, ${mousePos.y * -10}px)`, transition: "transform 0.4s ease-out" }}>
+                        <circle cx="20%" cy="70%" r="120" fill="none" stroke="#D4A373" strokeWidth="0.7" />
+                        <circle cx="20%" cy="70%" r="85" fill="none" stroke="#D4A373" strokeWidth="0.5" />
+                        <circle cx="20%" cy="70%" r="50" fill="none" stroke="#D4A373" strokeWidth="0.4" />
+                    </g>
+                    <g style={{ transform: `translate(${mousePos.x * 10}px, ${mousePos.y * -12}px)`, transition: "transform 0.5s ease-out" }}>
+                        <circle cx="10%" cy="40%" r="45" fill="none" stroke="#CCD5AE" strokeWidth="0.5" />
+                        <circle cx="10%" cy="40%" r="25" fill="none" stroke="#CCD5AE" strokeWidth="0.3" />
+                    </g>
+                    <g style={{ transform: `translate(${mousePos.x * -25}px, ${mousePos.y * 18}px)`, transition: "transform 0.35s ease-out" }}>
+                        <circle cx="90%" cy="55%" r="70" fill="none" stroke="#D4A373" strokeWidth="0.4" />
+                        <circle cx="90%" cy="55%" r="40" fill="none" stroke="#D4A373" strokeWidth="0.3" />
+                    </g>
                 </svg>
 
                 {/* Fine horizontal lines — like vintage paper texture */}
@@ -260,13 +304,16 @@ export function Hero() {
                 )}
             </AnimatePresence>
 
-            {/* ====== MAIN CONTENT ====== */}
-            <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1.0 }}
+            {/* ====== MAIN CONTENT — crossfade on language change ====== */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={language}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.4 }}
                 className="relative z-10 max-w-5xl w-full"
-            >
+              >
                 {/* Status Badge */}
                 <div className="flex justify-center mb-8 md:mb-14">
                     <div className="flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-[#CCD5AE]/60 bg-[#FAEDCD]/30 text-[11px] md:text-xs text-[#7A6B5A] uppercase tracking-widest backdrop-blur-sm">
@@ -275,72 +322,39 @@ export function Hero() {
                     </div>
                 </div>
 
-                {/* Main Content */}
                 <div className="space-y-6 md:space-y-8">
-                    {/* Prompt */}
-                    <motion.p
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
-                        className="text-base md:text-lg text-[#7A6B5A] font-mono mb-4"
-                    >
+                    <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-base md:text-lg text-[#7A6B5A] font-mono mb-4">
                         {t.greeting} <span className="text-[#5C4A3A]">{t.name}</span>
                     </motion.p>
 
-                    {/* Name — Space Grotesk, geometric retro-tech */}
-                    <motion.h1
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.4 }}
-                        className="text-4xl sm:text-7xl md:text-9xl font-light tracking-tight text-[#3D2C1E] whitespace-nowrap cursor-default flex justify-center font-display"
-                    >
+                    <motion.h1 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="text-4xl sm:text-7xl md:text-9xl font-light tracking-tight text-[#3D2C1E] whitespace-nowrap cursor-default flex justify-center font-display">
                         <div className="group flex items-center">
                             <span>Brendo&nbsp;</span>
                             <span className="relative flex items-center">
                                 <span>B</span>
-                                <span className="max-w-0 overflow-hidden opacity-0 group-hover:max-w-[1000px] group-hover:opacity-100 transition-all duration-700 ease-in-out whitespace-nowrap">
-                                    ittencourt
-                                </span>
-                                <span className="max-w-[100px] group-hover:max-w-0 group-hover:opacity-0 overflow-hidden transition-all duration-500 ease-in-out text-[#D4A373]">
-                                    .
-                                </span>
+                                <span className="max-w-0 overflow-hidden opacity-0 group-hover:max-w-[1000px] group-hover:opacity-100 transition-all duration-700 ease-in-out whitespace-nowrap">ittencourt</span>
+                                <span className="max-w-[100px] group-hover:max-w-0 group-hover:opacity-0 overflow-hidden transition-all duration-500 ease-in-out text-[#D4A373]">.</span>
                             </span>
                         </div>
                     </motion.h1>
 
-                    {/* Description */}
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.6 }}
-                        className="flex items-center justify-center gap-4 text-[#7A6B5A] text-base md:text-xl mt-6 md:mt-8"
-                    >
-                        <span>{t.description}</span>
+                    {/* Description — typewriter */}
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }} className="flex items-center justify-center gap-1 text-[#7A6B5A] text-base md:text-xl mt-6 md:mt-8">
+                        <span>{t.description ? t.description.slice(0, typedChars) : ""}</span>
                         <span className="animate-blink text-[#D4A373]">|</span>
                     </motion.div>
                 </div>
 
-                {/* Email */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.8 }}
-                    className="flex justify-center mt-10 md:mt-14"
-                >
-                    <a
-                        href={`mailto:${t.email}`}
-                        className="text-[#7A6B5A] hover:text-[#3D2C1E] transition-colors text-xl md:text-2xl font-mono flex items-center gap-2 group"
-                    >
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }} className="flex justify-center mt-10 md:mt-14">
+                    <a href={`mailto:${t.email}`} className="text-[#7A6B5A] hover:text-[#3D2C1E] transition-colors text-xl md:text-2xl font-mono flex items-center gap-2 group">
                         <span>{t.email}</span>
-                        <span className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-[#D4A373]">
-                            →
-                        </span>
+                        <span className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-[#D4A373]">→</span>
                     </a>
                 </motion.div>
+              </motion.div>
+            </AnimatePresence>
 
-            </motion.div>
-
-            {/* ====== Live system clock (bottom-left) ====== */}
+            {/* ====== Live system clock + working on (bottom-left) ====== */}
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -350,7 +364,85 @@ export function Hero() {
                 <span className="tabular-nums">{currentTime}</span>
                 <span className="text-[#CCD5AE]">·</span>
                 <span>uptime: {uptimeDays}d</span>
+                <span className="text-[#CCD5AE]">·</span>
+                <span className="flex items-center gap-1.5">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#D4A373] animate-pulse" />
+                    working on: <span className="text-[#D4A373]/80">data pipelines</span>
+                </span>
             </motion.div>
+
+            {/* ====== MOBILE TABS (md:hidden) ====== */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.2, duration: 0.5 }}
+                className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-2"
+            >
+                <button
+                    onClick={() => setMobilePanel(mobilePanel === "skills" ? null : "skills")}
+                    className={`flex items-center gap-2 px-4 py-2.5 rounded-full border backdrop-blur-md text-xs uppercase tracking-wider transition-all duration-300 ${
+                        mobilePanel === "skills" ? "bg-[#D4A373]/20 border-[#D4A373]/40 text-[#3D2C1E]" : "bg-[#FAEDCD]/60 border-[#CCD5AE]/50 text-[#7A6B5A]"
+                    }`}
+                >
+                    <Code className="h-3.5 w-3.5" />
+                    {language === "pt" ? "Skills" : "Skills"}
+                </button>
+                <button
+                    onClick={() => setMobilePanel(mobilePanel === "education" ? null : "education")}
+                    className={`flex items-center gap-2 px-4 py-2.5 rounded-full border backdrop-blur-md text-xs uppercase tracking-wider transition-all duration-300 ${
+                        mobilePanel === "education" ? "bg-[#D4A373]/20 border-[#D4A373]/40 text-[#3D2C1E]" : "bg-[#FAEDCD]/60 border-[#CCD5AE]/50 text-[#7A6B5A]"
+                    }`}
+                >
+                    <GraduationCap className="h-3.5 w-3.5" />
+                    {language === "pt" ? "Formação" : "Education"}
+                </button>
+            </motion.div>
+
+            {/* ====== MOBILE PANEL DRAWER ====== */}
+            <AnimatePresence>
+                {mobilePanel && (
+                    <motion.div
+                        initial={{ opacity: 0, y: "100%" }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: "100%" }}
+                        transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                        className="md:hidden fixed inset-x-0 bottom-0 z-50 max-h-[70vh] overflow-y-auto rounded-t-2xl border-t border-[#CCD5AE]/50 bg-[#FEFAE0]/95 backdrop-blur-xl p-6 pb-24"
+                    >
+                        <div className="flex items-center justify-between mb-5">
+                            <div className="flex items-center gap-2">
+                                {mobilePanel === "skills" ? <Code className="h-4 w-4 text-[#D4A373]" /> : <GraduationCap className="h-4 w-4 text-[#D4A373]" />}
+                                <span className="text-sm text-[#7A6B5A] uppercase tracking-[0.2em] font-medium">
+                                    {mobilePanel === "skills" ? (language === "pt" ? "Habilidades" : "Skills") : edu.title}
+                                </span>
+                            </div>
+                            <button onClick={() => setMobilePanel(null)} className="p-1.5 rounded-full bg-[#FAEDCD]/60 border border-[#CCD5AE]/40"><X className="h-4 w-4 text-[#7A6B5A]" /></button>
+                        </div>
+                        {mobilePanel === "skills" ? (
+                            <div className="grid grid-cols-2 gap-2.5">
+                                {SKILL_ITEMS.map((item) => (
+                                    <div key={item.name} className="flex items-center gap-3 rounded-lg border border-[#CCD5AE]/50 bg-[#FAEDCD]/40 px-4 py-3">
+                                        <item.icon size={18} style={{ color: item.color }} className="opacity-60 flex-shrink-0" />
+                                        <span className="text-sm text-[#5C4A3A]">{item.name}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <div className="space-y-4">
+                                {edu.items.map((item: any, idx: number) => (
+                                    <div key={idx} className="rounded-lg border border-[#CCD5AE]/50 bg-[#FAEDCD]/40 p-5 text-left">
+                                        <div className="flex items-start justify-between gap-3 mb-2">
+                                            <h4 className="text-sm font-semibold text-[#3D2C1E]">{item.institution}</h4>
+                                            <span className="text-[10px] text-[#7A6B5A] border border-[#CCD5AE]/60 px-2 py-0.5 rounded-full bg-[#E9EDC9]/40 font-mono">{item.period}</span>
+                                        </div>
+                                        <p className="text-sm text-[#5C4A3A] mb-1">{item.degree}</p>
+                                        <p className="text-xs text-[#7A6B5A]">{item.description}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
             {/* ====== LEFT EDGE INDICATOR — Skills ====== */}
             <AnimatePresence>

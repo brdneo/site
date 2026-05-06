@@ -79,6 +79,13 @@
   }
 }
 
+/* Hide default cursor on desktop (custom cursor replaces it) */
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
