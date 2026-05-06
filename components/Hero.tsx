@@ -109,11 +109,21 @@ export function Hero() {
         };
     }, [handleWheel]);
 
+    const hasLoadedRef = useRef(false);
+
     // Typewriter effect
     useEffect(() => {
+        if (hasLoadedRef.current) {
+            // Instant full text on language change
+            setTypedChars(1000);
+            return;
+        }
         setTypedChars(0);
-        const timer = setTimeout(() => setTypewriterReady(true), 800);
-        return () => { clearTimeout(timer); setTypewriterReady(false); };
+        const timer = setTimeout(() => {
+            setTypewriterReady(true);
+            hasLoadedRef.current = true;
+        }, 800);
+        return () => clearTimeout(timer);
     }, [language]);
 
     useEffect(() => {
@@ -146,52 +156,52 @@ export function Hero() {
     }, []);
 
     return (
-        <section className="relative flex h-screen flex-col items-center justify-center overflow-hidden px-6 md:px-4 text-center selection:bg-[#D4A373]/20 selection:text-[#3D2C1E] grain" onMouseMove={handleMouseMove}>
+        <section className="relative flex h-screen flex-col items-center justify-center overflow-hidden px-6 md:px-4 text-center selection:bg-hero-accent/20 selection:text-foreground grain" onMouseMove={handleMouseMove}>
 
             {/* ====== BACKGROUND — Retro minimalist layers ====== */}
             <div className="absolute inset-0">
 
                 {/* Base — warm cream gradient with subtle variation */}
-                <div className="absolute inset-0" style={{
-                    background: "linear-gradient(165deg, #FEFAE0 0%, #FAEDCD 25%, #FEFAE0 45%, #E9EDC9 70%, #FEFAE0 100%)"
+                <div className="absolute inset-0 transition-colors duration-500" style={{
+                    background: "var(--hero-grad)"
                 }} />
 
                 {/* Topographic contour rings — parallax enabled */}
-                <svg className="absolute inset-0 w-full h-full opacity-[0.06]" preserveAspectRatio="none">
+                <svg className="absolute inset-0 w-full h-full opacity-[0.06] transition-colors duration-500" preserveAspectRatio="none">
                     <g style={{ transform: `translate(${mousePos.x * 20}px, ${mousePos.y * 15}px)`, transition: "transform 0.3s ease-out" }}>
-                        <circle cx="75%" cy="25%" r="180" fill="none" stroke="#CCD5AE" strokeWidth="0.8" />
-                        <circle cx="75%" cy="25%" r="140" fill="none" stroke="#CCD5AE" strokeWidth="0.6" />
-                        <circle cx="75%" cy="25%" r="100" fill="none" stroke="#CCD5AE" strokeWidth="0.5" />
-                        <circle cx="75%" cy="25%" r="60" fill="none" stroke="#CCD5AE" strokeWidth="0.4" />
+                        <circle cx="75%" cy="25%" r="180" fill="none" stroke="var(--hero-topo-sage)" strokeWidth="0.8" />
+                        <circle cx="75%" cy="25%" r="140" fill="none" stroke="var(--hero-topo-sage)" strokeWidth="0.6" />
+                        <circle cx="75%" cy="25%" r="100" fill="none" stroke="var(--hero-topo-sage)" strokeWidth="0.5" />
+                        <circle cx="75%" cy="25%" r="60" fill="none" stroke="var(--hero-topo-sage)" strokeWidth="0.4" />
                     </g>
                     <g style={{ transform: `translate(${mousePos.x * -15}px, ${mousePos.y * -10}px)`, transition: "transform 0.4s ease-out" }}>
-                        <circle cx="20%" cy="70%" r="120" fill="none" stroke="#D4A373" strokeWidth="0.7" />
-                        <circle cx="20%" cy="70%" r="85" fill="none" stroke="#D4A373" strokeWidth="0.5" />
-                        <circle cx="20%" cy="70%" r="50" fill="none" stroke="#D4A373" strokeWidth="0.4" />
+                        <circle cx="20%" cy="70%" r="120" fill="none" stroke="var(--hero-topo-caramel)" strokeWidth="0.7" />
+                        <circle cx="20%" cy="70%" r="85" fill="none" stroke="var(--hero-topo-caramel)" strokeWidth="0.5" />
+                        <circle cx="20%" cy="70%" r="50" fill="none" stroke="var(--hero-topo-caramel)" strokeWidth="0.4" />
                     </g>
                     <g style={{ transform: `translate(${mousePos.x * 10}px, ${mousePos.y * -12}px)`, transition: "transform 0.5s ease-out" }}>
-                        <circle cx="10%" cy="40%" r="45" fill="none" stroke="#CCD5AE" strokeWidth="0.5" />
-                        <circle cx="10%" cy="40%" r="25" fill="none" stroke="#CCD5AE" strokeWidth="0.3" />
+                        <circle cx="10%" cy="40%" r="45" fill="none" stroke="var(--hero-topo-sage)" strokeWidth="0.5" />
+                        <circle cx="10%" cy="40%" r="25" fill="none" stroke="var(--hero-topo-sage)" strokeWidth="0.3" />
                     </g>
                     <g style={{ transform: `translate(${mousePos.x * -25}px, ${mousePos.y * 18}px)`, transition: "transform 0.35s ease-out" }}>
-                        <circle cx="90%" cy="55%" r="70" fill="none" stroke="#D4A373" strokeWidth="0.4" />
-                        <circle cx="90%" cy="55%" r="40" fill="none" stroke="#D4A373" strokeWidth="0.3" />
+                        <circle cx="90%" cy="55%" r="70" fill="none" stroke="var(--hero-topo-caramel)" strokeWidth="0.4" />
+                        <circle cx="90%" cy="55%" r="40" fill="none" stroke="var(--hero-topo-caramel)" strokeWidth="0.3" />
                     </g>
                 </svg>
 
                 {/* Fine horizontal lines — like vintage paper texture */}
-                <div className="absolute inset-0 opacity-[0.03]" style={{
-                    backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 39px, #CCD5AE 39px, #CCD5AE 40px)",
+                <div className="absolute inset-0 opacity-[0.03] transition-colors duration-500" style={{
+                    backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 39px, var(--hero-line-color) 39px, var(--hero-line-color) 40px)",
                 }} />
 
                 {/* Warm ambient glows — depth and warmth */}
-                <div className="absolute top-[15%] right-[20%] h-[500px] w-[500px] rounded-full bg-[#FAEDCD]/40 blur-[160px]" />
-                <div className="absolute bottom-[20%] left-[15%] h-[400px] w-[400px] rounded-full bg-[#E9EDC9]/30 blur-[140px]" />
-                <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full bg-[#FEFAE0]/60 blur-[100px]" />
+                <div className="absolute top-[15%] right-[20%] h-[500px] w-[500px] rounded-full blur-[160px] transition-colors duration-500" style={{ backgroundColor: "var(--hero-glow1)" }} />
+                <div className="absolute bottom-[20%] left-[15%] h-[400px] w-[400px] rounded-full blur-[140px] transition-colors duration-500" style={{ backgroundColor: "var(--hero-glow2)" }} />
+                <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full blur-[100px] transition-colors duration-500" style={{ backgroundColor: "var(--hero-glow3)" }} />
 
                 {/* Soft edge vignette */}
-                <div className="absolute inset-0" style={{
-                    background: "radial-gradient(ellipse at center, transparent 50%, rgba(204, 213, 174, 0.15) 100%)"
+                <div className="absolute inset-0 transition-colors duration-500" style={{
+                    background: "radial-gradient(ellipse at center, transparent 50%, var(--hero-vignette) 100%)"
                 }} />
             </div>
 
@@ -231,11 +241,11 @@ export function Hero() {
                     >
                         {/* Panel header */}
                         <div className="flex items-center gap-3 mb-6">
-                            <Code className="h-4 w-4 text-[#D4A373]" />
-                            <span className="text-sm text-[#7A6B5A] uppercase tracking-[0.2em] font-medium">
+                            <Code className="h-4 w-4 text-hero-accent" />
+                            <span className="text-sm text-hero-text-muted uppercase tracking-[0.2em] font-medium">
                                 {language === "pt" ? "Habilidades" : "Skills"}
                             </span>
-                            <div className="h-px flex-1 bg-[#CCD5AE]/60" />
+                            <div className="h-px flex-1 bg-hero-border" />
                         </div>
 
                         {/* Skills list — icon + label, 2 columns */}
@@ -246,14 +256,14 @@ export function Hero() {
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: idx * 0.04, duration: 0.3 }}
-                                    className="group/skill flex items-center gap-3 rounded-lg border border-[#CCD5AE]/50 bg-[#FAEDCD]/40 backdrop-blur-sm px-4 py-3 transition-all duration-300 hover:border-[#CCD5AE] hover:bg-[#FAEDCD]/70 hover:shadow-sm cursor-default"
+                                    className="group/skill flex items-center gap-3 rounded-lg border border-hero-border bg-hero-surface backdrop-blur-sm px-4 py-3 transition-all duration-300 hover:border-hero-border-hover hover:bg-hero-surface-hover hover:shadow-sm cursor-default"
                                 >
                                     <item.icon
                                         size={20}
                                         style={{ color: item.color }}
                                         className="opacity-50 group-hover/skill:opacity-90 transition-all duration-300 flex-shrink-0"
                                     />
-                                    <span className="text-sm text-[#7A6B5A] group-hover/skill:text-[#3D2C1E] transition-colors duration-300 whitespace-nowrap">
+                                    <span className="text-sm text-hero-text-muted group-hover/skill:text-hero-text transition-colors duration-300 whitespace-nowrap">
                                         {item.name}
                                     </span>
                                 </motion.div>
@@ -277,11 +287,11 @@ export function Hero() {
                     >
                         {/* Panel header */}
                         <div className="flex items-center gap-3 mb-2">
-                            <div className="h-px flex-1 bg-[#CCD5AE]/60" />
-                            <span className="text-sm text-[#7A6B5A] uppercase tracking-[0.2em] font-medium">
+                            <div className="h-px flex-1 bg-hero-border" />
+                            <span className="text-sm text-hero-text-muted uppercase tracking-[0.2em] font-medium">
                                 {edu.title}
                             </span>
-                            <GraduationCap className="h-4 w-4 text-[#D4A373]" />
+                            <GraduationCap className="h-4 w-4 text-hero-accent" />
                         </div>
 
                         {edu.items.map((item: any, idx: number) => (
@@ -290,84 +300,80 @@ export function Hero() {
                                 initial={{ opacity: 0, x: 30 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: idx * 0.12, duration: 0.4 }}
-                                className="rounded-lg border border-[#CCD5AE]/50 bg-[#FAEDCD]/40 backdrop-blur-sm p-6 text-left transition-all duration-300 hover:border-[#CCD5AE] hover:bg-[#FAEDCD]/70 hover:shadow-sm"
+                                className="rounded-lg border border-hero-border bg-hero-surface backdrop-blur-sm p-6 text-left transition-all duration-300 hover:border-hero-border-hover hover:bg-hero-surface-hover hover:shadow-sm"
                             >
                                 <div className="flex items-start justify-between gap-3 mb-3">
-                                    <h4 className="text-base font-semibold text-[#3D2C1E] leading-snug">{item.institution}</h4>
-                                    <span className="text-[11px] text-[#7A6B5A] border border-[#CCD5AE]/60 px-2.5 py-1 rounded-full bg-[#E9EDC9]/40 whitespace-nowrap flex-shrink-0 font-mono">{item.period}</span>
+                                    <h4 className="text-base font-semibold text-hero-text leading-snug">{item.institution}</h4>
+                                    <span className="text-[11px] text-hero-text-muted border border-hero-border px-2.5 py-1 rounded-full bg-hero-period-bg whitespace-nowrap flex-shrink-0 font-mono">{item.period}</span>
                                 </div>
-                                <p className="text-base text-[#5C4A3A] leading-snug mb-2">{item.degree}</p>
-                                <p className="text-sm text-[#7A6B5A] leading-relaxed">{item.description}</p>
+                                <p className="text-base text-hero-text-mid leading-snug mb-2">{item.degree}</p>
+                                <p className="text-sm text-hero-text-muted leading-relaxed">{item.description}</p>
                             </motion.div>
                         ))}
                     </motion.div>
                 )}
             </AnimatePresence>
 
-            {/* ====== MAIN CONTENT — crossfade on language change ====== */}
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={language}
+            {/* ====== MAIN CONTENT ====== */}
+            <motion.div
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.4 }}
                 className="relative z-10 max-w-5xl w-full"
-              >
+            >
                 {/* Status Badge */}
                 <div className="flex justify-center mb-8 md:mb-14">
-                    <div className="flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-[#CCD5AE]/60 bg-[#FAEDCD]/30 text-[11px] md:text-xs text-[#7A6B5A] uppercase tracking-widest backdrop-blur-sm">
-                        <div className="h-2 w-2 rounded-full bg-[#CCD5AE] shadow-[0_0_6px_rgba(204,213,174,0.5)] animate-pulse" />
+                    <div className="flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-hero-border bg-hero-badge-bg text-[11px] md:text-xs text-hero-text-muted uppercase tracking-widest backdrop-blur-sm">
+                        <div className="h-2 w-2 rounded-full bg-hero-sage animate-pulse" style={{ boxShadow: "0 0 6px var(--hero-sage)" }} />
                         {t.badge}
                     </div>
                 </div>
 
                 <div className="space-y-6 md:space-y-8">
-                    <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-base md:text-lg text-[#7A6B5A] font-mono mb-4">
-                        {t.greeting} <span className="text-[#5C4A3A]">{t.name}</span>
+                    <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-base md:text-lg text-hero-text-muted font-mono mb-4">
+                        {t.greeting} <span className="text-hero-text-mid">{t.name}</span>
                     </motion.p>
 
-                    <motion.h1 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="text-4xl sm:text-7xl md:text-9xl font-light tracking-tight text-[#3D2C1E] whitespace-nowrap cursor-default flex justify-center font-display">
+                    <motion.h1 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="text-4xl sm:text-7xl md:text-9xl font-light tracking-tight text-hero-text whitespace-nowrap cursor-default flex justify-center font-display">
                         <div className="group flex items-center">
                             <span>Brendo&nbsp;</span>
                             <span className="relative flex items-center">
                                 <span>B</span>
                                 <span className="max-w-0 overflow-hidden opacity-0 group-hover:max-w-[1000px] group-hover:opacity-100 transition-all duration-700 ease-in-out whitespace-nowrap">ittencourt</span>
-                                <span className="max-w-[100px] group-hover:max-w-0 group-hover:opacity-0 overflow-hidden transition-all duration-500 ease-in-out text-[#D4A373]">.</span>
+                                <span className="max-w-[100px] group-hover:max-w-0 group-hover:opacity-0 overflow-hidden transition-all duration-500 ease-in-out text-hero-accent">.</span>
                             </span>
                         </div>
                     </motion.h1>
 
                     {/* Description — typewriter */}
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }} className="flex items-center justify-center gap-1 text-[#7A6B5A] text-base md:text-xl mt-6 md:mt-8">
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }} className="flex items-center justify-center gap-1 text-hero-text-muted text-base md:text-xl mt-6 md:mt-8">
                         <span>{t.description ? t.description.slice(0, typedChars) : ""}</span>
-                        <span className="animate-blink text-[#D4A373]">|</span>
+                        <span className="animate-blink text-hero-accent">|</span>
                     </motion.div>
                 </div>
 
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }} className="flex justify-center mt-10 md:mt-14">
-                    <a href={`mailto:${t.email}`} className="relative text-[#7A6B5A] hover:text-[#3D2C1E] transition-colors text-xl md:text-2xl font-mono group">
+                    <a href={`mailto:${t.email}`} className="relative text-hero-text-muted hover:text-hero-text transition-colors text-xl md:text-2xl font-mono group">
                         <span>{t.email}</span>
-                        <span className="absolute -right-7 top-1/2 -translate-y-1/2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-[#D4A373]">→</span>
+                        <span className="absolute -right-7 top-1/2 -translate-y-1/2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-hero-accent">→</span>
                     </a>
                 </motion.div>
-              </motion.div>
-            </AnimatePresence>
+            </motion.div>
 
             {/* ====== Live system clock + working on (bottom-left) ====== */}
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.5, duration: 1 }}
-                className="absolute bottom-4 left-5 z-20 hidden md:flex items-center gap-3 text-[10px] text-[#7A6B5A]/70 uppercase tracking-widest font-mono"
+                className="absolute bottom-4 left-5 z-20 hidden md:flex items-center gap-3 text-[10px] text-hero-text-muted uppercase tracking-widest font-mono"
             >
                 <span className="tabular-nums">{currentTime}</span>
-                <span className="text-[#CCD5AE]">·</span>
+                <span className="text-hero-sage">·</span>
                 <span>uptime: {uptimeDays}d</span>
-                <span className="text-[#CCD5AE]">·</span>
+                <span className="text-hero-sage">·</span>
                 <span className="flex items-center gap-1.5">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#D4A373] animate-pulse" />
-                    working on: <span className="text-[#D4A373]/80">data pipelines</span>
+                    <span className="h-1.5 w-1.5 rounded-full bg-hero-accent animate-pulse" />
+                    working on: <span className="opacity-80 text-hero-accent">data pipelines</span>
                 </span>
             </motion.div>
 
@@ -403,36 +409,36 @@ export function Hero() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: "100%" }}
                         transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                        className="md:hidden fixed inset-x-0 bottom-0 z-50 max-h-[70vh] overflow-y-auto rounded-t-2xl border-t border-[#CCD5AE]/50 bg-[#FEFAE0]/95 backdrop-blur-xl p-6 pb-24"
+                        className="md:hidden fixed inset-x-0 bottom-0 z-50 max-h-[70vh] overflow-y-auto rounded-t-2xl border-t border-hero-border bg-hero-bg/95 backdrop-blur-xl p-6 pb-24"
                     >
                         <div className="flex items-center justify-between mb-5">
                             <div className="flex items-center gap-2">
-                                {mobilePanel === "skills" ? <Code className="h-4 w-4 text-[#D4A373]" /> : <GraduationCap className="h-4 w-4 text-[#D4A373]" />}
-                                <span className="text-sm text-[#7A6B5A] uppercase tracking-[0.2em] font-medium">
+                                {mobilePanel === "skills" ? <Code className="h-4 w-4 text-hero-accent" /> : <GraduationCap className="h-4 w-4 text-hero-accent" />}
+                                <span className="text-sm text-hero-text-muted uppercase tracking-[0.2em] font-medium">
                                     {mobilePanel === "skills" ? (language === "pt" ? "Habilidades" : "Skills") : edu.title}
                                 </span>
                             </div>
-                            <button onClick={() => setMobilePanel(null)} className="p-1.5 rounded-full bg-[#FAEDCD]/60 border border-[#CCD5AE]/40"><X className="h-4 w-4 text-[#7A6B5A]" /></button>
+                            <button onClick={() => setMobilePanel(null)} className="p-1.5 rounded-full bg-hero-surface-hover border border-hero-border"><X className="h-4 w-4 text-hero-text-muted" /></button>
                         </div>
                         {mobilePanel === "skills" ? (
                             <div className="grid grid-cols-2 gap-2.5">
                                 {SKILL_ITEMS.map((item) => (
-                                    <div key={item.name} className="flex items-center gap-3 rounded-lg border border-[#CCD5AE]/50 bg-[#FAEDCD]/40 px-4 py-3">
+                                    <div key={item.name} className="flex items-center gap-3 rounded-lg border border-hero-border bg-hero-surface px-4 py-3">
                                         <item.icon size={18} style={{ color: item.color }} className="opacity-60 flex-shrink-0" />
-                                        <span className="text-sm text-[#5C4A3A]">{item.name}</span>
+                                        <span className="text-sm text-hero-text-mid">{item.name}</span>
                                     </div>
                                 ))}
                             </div>
                         ) : (
                             <div className="space-y-4">
                                 {edu.items.map((item: any, idx: number) => (
-                                    <div key={idx} className="rounded-lg border border-[#CCD5AE]/50 bg-[#FAEDCD]/40 p-5 text-left">
+                                    <div key={idx} className="rounded-lg border border-hero-border bg-hero-surface p-5 text-left">
                                         <div className="flex items-start justify-between gap-3 mb-2">
-                                            <h4 className="text-sm font-semibold text-[#3D2C1E]">{item.institution}</h4>
-                                            <span className="text-[10px] text-[#7A6B5A] border border-[#CCD5AE]/60 px-2 py-0.5 rounded-full bg-[#E9EDC9]/40 font-mono">{item.period}</span>
+                                            <h4 className="text-sm font-semibold text-hero-text">{item.institution}</h4>
+                                            <span className="text-[10px] text-hero-text-muted border border-hero-border px-2 py-0.5 rounded-full bg-hero-period-bg font-mono">{item.period}</span>
                                         </div>
-                                        <p className="text-sm text-[#5C4A3A] mb-1">{item.degree}</p>
-                                        <p className="text-xs text-[#7A6B5A]">{item.description}</p>
+                                        <p className="text-sm text-hero-text-mid mb-1">{item.degree}</p>
+                                        <p className="text-xs text-hero-text-muted">{item.description}</p>
                                     </div>
                                 ))}
                             </div>
@@ -451,17 +457,17 @@ export function Hero() {
                         transition={{ delay: 1.4, duration: 0.5 }}
                         className="absolute left-5 top-1/2 -translate-y-1/2 z-20 hidden md:flex flex-col items-center gap-3"
                     >
-                        <ChevronLeft className="h-4 w-4 text-[#CCD5AE] animate-pulse-subtle" />
-                        <div className="h-8 w-[1px] bg-[#CCD5AE]/60 relative overflow-hidden">
-                            <div className="absolute inset-0 bg-[#D4A373]/60 animate-scroll-line-x-left" />
+                        <ChevronLeft className="h-4 w-4 text-hero-sage animate-pulse-subtle" />
+                        <div className="h-8 w-[1px] bg-hero-border relative overflow-hidden">
+                            <div className="absolute inset-0 bg-hero-accent/60 animate-scroll-line-x-left" />
                         </div>
-                        <span className="text-[10px] text-[#7A6B5A]/60 uppercase tracking-widest font-mono writing-vertical">
+                        <span className="text-[10px] text-hero-text-muted/60 uppercase tracking-widest font-mono writing-vertical">
                             {language === "pt" ? "habilidades" : "skills"}
                         </span>
-                        <div className="h-8 w-[1px] bg-[#CCD5AE]/60 relative overflow-hidden">
-                            <div className="absolute inset-0 bg-[#D4A373]/60 animate-scroll-line-x-left" />
+                        <div className="h-8 w-[1px] bg-hero-border relative overflow-hidden">
+                            <div className="absolute inset-0 bg-hero-accent/60 animate-scroll-line-x-left" />
                         </div>
-                        <Code className="h-3.5 w-3.5 text-[#CCD5AE]" />
+                        <Code className="h-3.5 w-3.5 text-hero-sage" />
                     </motion.div>
                 )}
             </AnimatePresence>
@@ -476,17 +482,17 @@ export function Hero() {
                         transition={{ delay: 1.6, duration: 0.5 }}
                         className="absolute right-5 top-1/2 -translate-y-1/2 z-20 hidden md:flex flex-col items-center gap-3"
                     >
-                        <GraduationCap className="h-3.5 w-3.5 text-[#CCD5AE]" />
-                        <div className="h-8 w-[1px] bg-[#CCD5AE]/60 relative overflow-hidden">
-                            <div className="absolute inset-0 bg-[#D4A373]/60 animate-scroll-line-x-right" />
+                        <GraduationCap className="h-3.5 w-3.5 text-hero-sage" />
+                        <div className="h-8 w-[1px] bg-hero-border relative overflow-hidden">
+                            <div className="absolute inset-0 bg-hero-accent/60 animate-scroll-line-x-right" />
                         </div>
-                        <span className="text-[10px] text-[#7A6B5A]/60 uppercase tracking-widest font-mono writing-vertical">
+                        <span className="text-[10px] text-hero-text-muted/60 uppercase tracking-widest font-mono writing-vertical">
                             {language === "pt" ? "formação" : "education"}
                         </span>
-                        <div className="h-8 w-[1px] bg-[#CCD5AE]/60 relative overflow-hidden">
-                            <div className="absolute inset-0 bg-[#D4A373]/60 animate-scroll-line-x-right" />
+                        <div className="h-8 w-[1px] bg-hero-border relative overflow-hidden">
+                            <div className="absolute inset-0 bg-hero-accent/60 animate-scroll-line-x-right" />
                         </div>
-                        <ChevronRight className="h-4 w-4 text-[#CCD5AE] animate-pulse-subtle" />
+                        <ChevronRight className="h-4 w-4 text-hero-sage animate-pulse-subtle" />
                     </motion.div>
                 )}
             </AnimatePresence>
@@ -501,9 +507,9 @@ export function Hero() {
                         transition={{ delay: 1.2, duration: 0.5 }}
                         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
                     >
-                        <span className="text-[10px] text-[#7A6B5A]/60 uppercase tracking-widest font-mono">scroll</span>
-                        <div className="w-[1px] h-6 bg-[#CCD5AE]/60 relative overflow-hidden">
-                            <div className="absolute inset-0 bg-[#D4A373]/60 animate-scroll-line" />
+                        <span className="text-[10px] text-hero-text-muted/60 uppercase tracking-widest font-mono">scroll</span>
+                        <div className="w-[1px] h-6 bg-hero-border relative overflow-hidden">
+                            <div className="absolute inset-0 bg-hero-accent/60 animate-scroll-line" />
                         </div>
                     </motion.div>
                 )}
@@ -533,7 +539,7 @@ export function Hero() {
                                     transition={{ delay: idx * 0.07, duration: 0.4 }}
                                     className="group/icon relative flex flex-col items-center justify-center"
                                 >
-                                    <div className="relative z-10 flex h-11 w-11 sm:h-14 sm:w-14 items-center justify-center rounded-xl border border-[#CCD5AE]/50 bg-[#FAEDCD]/40 backdrop-blur-sm transition-all duration-300 group-hover/icon:border-[#CCD5AE] group-hover/icon:bg-[#FAEDCD]/70 cursor-pointer group-hover/icon:shadow-md group-hover/icon:shadow-[#D4A373]/10">
+                                    <div className="relative z-10 flex h-11 w-11 sm:h-14 sm:w-14 items-center justify-center rounded-xl border border-hero-border bg-hero-surface backdrop-blur-sm transition-all duration-300 group-hover/icon:border-hero-border-hover group-hover/icon:bg-hero-surface-hover cursor-pointer group-hover/icon:shadow-md group-hover/icon:shadow-hero-accent/10">
                                         <item.icon
                                             className="w-5 h-5 sm:w-7 sm:h-7 transition-all duration-300 group-hover/icon:scale-110 opacity-40 group-hover/icon:opacity-80"
                                             style={{ color: item.color }}
@@ -542,7 +548,7 @@ export function Hero() {
 
                                     {/* Tooltip */}
                                     <div className="absolute -top-10 opacity-0 group-hover/icon:opacity-100 transition-all duration-300 z-50 pointer-events-none whitespace-nowrap">
-                                        <span className="bg-[#3D2C1E] text-[#FEFAE0] text-[10px] uppercase font-medium px-2.5 py-1 rounded-full shadow-lg">
+                                        <span className="bg-hero-tooltip-bg text-hero-tooltip-text text-[10px] uppercase font-medium px-2.5 py-1 rounded-full shadow-lg">
                                             {item.name}
                                         </span>
                                     </div>

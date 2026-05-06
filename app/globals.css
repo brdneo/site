@@ -28,6 +28,29 @@
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
+
+  /* Hero semantic colors */
+  --color-hero-bg: var(--hero-bg);
+  --color-hero-text: var(--hero-text);
+  --color-hero-text-mid: var(--hero-text-mid);
+  --color-hero-text-muted: var(--hero-text-muted);
+  --color-hero-surface: var(--hero-surface);
+  --color-hero-surface-hover: var(--hero-surface-hover);
+  --color-hero-border: var(--hero-border);
+  --color-hero-border-hover: var(--hero-border-hover);
+  --color-hero-sage: var(--hero-sage);
+  --color-hero-accent: var(--hero-accent);
+  --color-hero-badge-bg: var(--hero-badge-bg);
+  --color-hero-tooltip-bg: var(--hero-tooltip-bg);
+  --color-hero-tooltip-text: var(--hero-tooltip-text);
+  --color-hero-glow1: var(--hero-glow1);
+  --color-hero-glow2: var(--hero-glow2);
+  --color-hero-glow3: var(--hero-glow3);
+  --color-hero-vignette: var(--hero-vignette);
+  --color-hero-topo-sage: var(--hero-topo-sage);
+  --color-hero-topo-caramel: var(--hero-topo-caramel);
+  --color-hero-line-color: var(--hero-line-color);
+  --color-hero-period-bg: var(--hero-period-bg);
 }
 
 @layer base {
@@ -52,7 +75,32 @@
     --input: #E9EDC9;
     --ring: #D4A373;
     --radius: 0.75rem;
+
+    /* Hero semantic colors */
+    --hero-bg: #FEFAE0;
+    --hero-text: #3D2C1E;
+    --hero-text-mid: #5C4A3A;
+    --hero-text-muted: #7A6B5A;
+    --hero-surface: rgba(250, 237, 205, 0.4);
+    --hero-surface-hover: rgba(250, 237, 205, 0.7);
+    --hero-border: rgba(204, 213, 174, 0.5);
+    --hero-border-hover: #CCD5AE;
+    --hero-sage: #CCD5AE;
+    --hero-accent: #D4A373;
+    --hero-badge-bg: rgba(250, 237, 205, 0.3);
+    --hero-tooltip-bg: #3D2C1E;
+    --hero-tooltip-text: #FEFAE0;
+    --hero-grad: linear-gradient(165deg, #FEFAE0 0%, #FAEDCD 25%, #FEFAE0 45%, #E9EDC9 70%, #FEFAE0 100%);
+    --hero-glow1: rgba(250, 237, 205, 0.4);
+    --hero-glow2: rgba(233, 237, 201, 0.3);
+    --hero-glow3: rgba(254, 250, 224, 0.6);
+    --hero-vignette: rgba(204, 213, 174, 0.15);
+    --hero-topo-sage: #CCD5AE;
+    --hero-topo-caramel: #D4A373;
+    --hero-line-color: #CCD5AE;
+    --hero-period-bg: rgba(233, 237, 201, 0.4);
   }
+
 }
 
 @layer utilities {
@@ -76,13 +124,6 @@
     background-color: var(--background);
     color: var(--foreground);
     font-feature-settings: "rlig" 1, "calt" 1;
-  }
-}
-
-/* Hide default cursor on desktop (custom cursor replaces it) */
-@media (pointer: fine) {
-  * {
-    cursor: none !important;
   }
 }
 

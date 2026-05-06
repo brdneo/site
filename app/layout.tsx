@@ -44,7 +44,6 @@ export const metadata: Metadata = {
 };
 
 import { Navbar } from "@/components/Navbar";
-import { CustomCursor } from "@/components/CustomCursor";
 import { LanguageProvider } from "@/lib/language-context";
 
 // JSON-LD structured data (Schema.org Person)
@@ -82,7 +81,6 @@ export default function RootLayout({
         style={{ fontFamily: "var(--font-sans)" }}
       >
         <LanguageProvider>
-          <CustomCursor />
           <Navbar />
           {children}
         </LanguageProvider>
