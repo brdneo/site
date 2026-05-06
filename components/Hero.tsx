@@ -346,9 +346,9 @@ export function Hero() {
                 </div>
 
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }} className="flex justify-center mt-10 md:mt-14">
-                    <a href={`mailto:${t.email}`} className="text-[#7A6B5A] hover:text-[#3D2C1E] transition-colors text-xl md:text-2xl font-mono flex items-center gap-2 group">
+                    <a href={`mailto:${t.email}`} className="relative text-[#7A6B5A] hover:text-[#3D2C1E] transition-colors text-xl md:text-2xl font-mono group">
                         <span>{t.email}</span>
-                        <span className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-[#D4A373]">→</span>
+                        <span className="absolute -right-7 top-1/2 -translate-y-1/2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-[#D4A373]">→</span>
                     </a>
                 </motion.div>
               </motion.div>
@@ -371,32 +371,29 @@ export function Hero() {
                 </span>
             </motion.div>
 
-            {/* ====== MOBILE TABS (md:hidden) ====== */}
-            <motion.div
+            {/* ====== MOBILE BUTTONS — icon-only, corners (md:hidden) ====== */}
+            <motion.button
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.2, duration: 0.5 }}
-                className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-2"
+                onClick={() => setMobilePanel(mobilePanel === "skills" ? null : "skills")}
+                className={`md:hidden fixed bottom-5 left-5 z-40 flex items-center justify-center h-10 w-10 rounded-full border backdrop-blur-md transition-all duration-300 ${
+                    mobilePanel === "skills" ? "bg-[#D4A373]/20 border-[#D4A373]/40" : "bg-[#FAEDCD]/70 border-[#CCD5AE]/60"
+                }`}
             >
-                <button
-                    onClick={() => setMobilePanel(mobilePanel === "skills" ? null : "skills")}
-                    className={`flex items-center gap-2 px-4 py-2.5 rounded-full border backdrop-blur-md text-xs uppercase tracking-wider transition-all duration-300 ${
-                        mobilePanel === "skills" ? "bg-[#D4A373]/20 border-[#D4A373]/40 text-[#3D2C1E]" : "bg-[#FAEDCD]/60 border-[#CCD5AE]/50 text-[#7A6B5A]"
-                    }`}
-                >
-                    <Code className="h-3.5 w-3.5" />
-                    {language === "pt" ? "Skills" : "Skills"}
-                </button>
-                <button
-                    onClick={() => setMobilePanel(mobilePanel === "education" ? null : "education")}
-                    className={`flex items-center gap-2 px-4 py-2.5 rounded-full border backdrop-blur-md text-xs uppercase tracking-wider transition-all duration-300 ${
-                        mobilePanel === "education" ? "bg-[#D4A373]/20 border-[#D4A373]/40 text-[#3D2C1E]" : "bg-[#FAEDCD]/60 border-[#CCD5AE]/50 text-[#7A6B5A]"
-                    }`}
-                >
-                    <GraduationCap className="h-3.5 w-3.5" />
-                    {language === "pt" ? "Formação" : "Education"}
-                </button>
-            </motion.div>
+                <Code className={`h-4 w-4 transition-colors duration-300 ${mobilePanel === "skills" ? "text-[#D4A373]" : "text-[#7A6B5A]"}`} />
+            </motion.button>
+            <motion.button
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.3, duration: 0.5 }}
+                onClick={() => setMobilePanel(mobilePanel === "education" ? null : "education")}
+                className={`md:hidden fixed bottom-5 right-5 z-40 flex items-center justify-center h-10 w-10 rounded-full border backdrop-blur-md transition-all duration-300 ${
+                    mobilePanel === "education" ? "bg-[#D4A373]/20 border-[#D4A373]/40" : "bg-[#FAEDCD]/70 border-[#CCD5AE]/60"
+                }`}
+            >
+                <GraduationCap className={`h-4 w-4 transition-colors duration-300 ${mobilePanel === "education" ? "text-[#D4A373]" : "text-[#7A6B5A]"}`} />
+            </motion.button>
 
             {/* ====== MOBILE PANEL DRAWER ====== */}
             <AnimatePresence>
