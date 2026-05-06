@@ -36,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${dmSans.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} antialiased bg-background text-foreground selection:bg-amber-900/30 selection:text-stone-900 font-sans`}
+        className={`${dmSans.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} antialiased bg-background text-foreground selection:bg-[#D4A373]/20 selection:text-[#3D2C1E] font-sans`}
         style={{ fontFamily: "var(--font-sans)" }}
       >
         <LanguageProvider>
